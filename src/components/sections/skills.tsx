@@ -1,19 +1,15 @@
 'use client';
 
-import { useState, useEffect, useTransition } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Section } from './section-wrapper';
-import { aiHighlightSkills } from '@/ai/flows/highlight-skills';
 import { Loader2, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
 export function Skills({ showMoreButton = false }: { showMoreButton?: boolean }) {
   const [skillsData, setSkillsData] = useState<Record<string, string[]>>({});
-  const [viewedSkills, setViewedSkills] = useState<string[]>([]);
-  const [highlightedSkills, setHighlightedSkills] = useState<string[]>([]);
-  const [isPending, startTransition] = useTransition();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -33,25 +29,11 @@ export function Skills({ showMoreButton = false }: { showMoreButton?: boolean })
     fetchSkills();
   }, []);
 
-  useEffect(() => {
-    if (viewedSkills.length > 0) {
-      startTransition(async () => {
-        const { highlightedSkills: newHighlights } = await aiHighlightSkills({ viewedSkills });
-        setHighlightedSkills(newHighlights);
-      });
-    }
-  }, [viewedSkills]);
-
-  const handleSkillClick = (skill: string) => {
-    setViewedSkills((prev) => [...new Set([...prev, skill])]);
-  };
-
   return (
     <Section id="skills" title="Technical Skills">
        <div className="flex justify-center mb-8">
          <p className="max-w-2xl text-center text-muted-foreground">
-            I have a diverse skill set spanning web development and cybersecurity. Click on a skill to see related ones highlighted by AI.
-            {isPending && <Loader2 className="ml-2 inline-block h-4 w-4 animate-spin" />}
+            I have a diverse skill set spanning web development and cybersecurity.
         </p>
        </div>
       {loading ? (
@@ -69,10 +51,8 @@ export function Skills({ showMoreButton = false }: { showMoreButton?: boolean })
                 {skills.map((skill) => (
                     <Badge
                     key={skill}
-                    variant={highlightedSkills.includes(skill) ? 'default' : 'secondary'}
-                    className="cursor-pointer text-base transition-all hover:scale-105 active:scale-95"
-                    onClick={() => handleSkillClick(skill)}
-                    aria-pressed={highlightedSkills.includes(skill)}
+                    variant='secondary'
+                    className="text-base"
                     >
                     {skill}
                     </Badge>
