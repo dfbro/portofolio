@@ -6,7 +6,9 @@ import { Sidebar } from '@/components/layout/sidebar';
 
 const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' });
 
-const appUrl = process.env.APP_URL || 'http://localhost:9002';
+const protocol = process.env.APP_SSL === 'true' ? 'https' : 'http';
+const appHostname = process.env.APP_HOSTNAME || 'localhost:9002';
+const appUrl = `${protocol}://${appHostname}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl),
