@@ -146,7 +146,7 @@ export default function ManageWriteupsPage() {
                       onChange={(e) => handleChange(item.id, 'writeupUrl', e.target.value)} 
                       placeholder="https://example.com/writeup" 
                     />
-                    <p className="text-sm text-muted-foreground invisible peer-invalid:visible">
+                    <p className="text-sm text-destructive invisible peer-invalid:visible">
                       Please enter a valid URL (e.g., https://example.com).
                     </p>
 
