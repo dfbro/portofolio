@@ -10,7 +10,7 @@ import { ArrowRight } from 'lucide-react';
 export function Projects({ showAll = false }: { showAll?: boolean }) {
   const projectsToShow = showAll ? PROJECTS : PROJECTS.slice(0, 3);
   return (
-    <Section id="projects" title="Web Development Projects">
+    <Section id="projects" title="Projects">
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {projectsToShow.map((project) => (
           <Card key={project.title} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2">

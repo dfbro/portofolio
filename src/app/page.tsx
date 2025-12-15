@@ -3,7 +3,6 @@ import { Hero } from '@/components/sections/hero';
 import { Projects } from '@/components/sections/projects';
 import { Skills } from '@/components/sections/skills';
 import { Ctf } from '@/components/sections/ctf';
-import { Blog } from '@/components/sections/blog';
 import { Contact } from '@/components/sections/contact';
 import { Footer } from '@/components/layout/footer';
 
@@ -14,9 +13,8 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <Projects />
-        <Skills showMoreButton={true} />
+        <Skills />
         <Ctf />
-        <Blog showMoreButton={true} />
         <Contact />
       </main>
       <Footer />

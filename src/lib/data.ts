@@ -14,9 +14,8 @@ const PlaceHolderImages = data.placeholderImages;
 export const NAV_LINKS = [
   { name: 'Home', href: '/#home' },
   { name: 'Projects', href: '/projects' },
-  { name: 'Skills', href: '/skills' },
+  { name: 'Skills', href: '/#skills' },
   { name: 'CTF', href: '/ctf' },
-  { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/#contact' },
 ];
 
@@ -103,21 +102,6 @@ export const SKILLS: Record<string, string[]> = {
     'Web Development': ['React', 'Next.js', 'TypeScript', 'Node.js', 'GraphQL', 'PostgreSQL', 'Docker', 'Tailwind CSS'],
     'Cybersecurity': ['Reverse Engineering', 'Web Exploitation', 'Forensics', 'Cryptography', 'Wireshark', 'Metasploit', 'Burp Suite', 'Ghidra']
 };
-
-export const BLOG_POSTS = [
-    {
-        title: "Mastering XSS: From Basics to Advanced",
-        description: "A deep dive into Cross-Site Scripting vulnerabilities, including mitigation techniques.",
-        link: "#",
-        image: findImage('blog-1'),
-    },
-    {
-        title: "Why I Chose Next.js for My Portfolio",
-        description: "An overview of the benefits of using Next.js for building modern, performant web applications.",
-        link: "#",
-        image: findImage('blog-2'),
-    }
-];
 
 export const ICONS = {
     github: Github,
