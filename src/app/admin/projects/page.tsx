@@ -11,6 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 import { ArrowLeft, Loader2, Plus, Trash2 } from 'lucide-react';
+import type { z } from 'zod';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -25,11 +26,12 @@ type Project = {
   id: string;
   title: string;
   description: string;
-  techStack: string;
+  techStack: string; // Stored as comma-separated string for the form
   repoUrl: string;
   liveUrl: string;
   imageUrl: string;
 };
+
 
 export default function ManageProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -46,6 +48,8 @@ export default function ManageProjectsPage() {
         const formattedProjects = data.map(p => ({
           ...p,
           techStack: Array.isArray(p.techStack) ? p.techStack.join(', ') : '',
+          liveUrl: p.liveUrl ?? '',
+          imageUrl: p.imageUrl ?? '',
         }));
         setProjects(formattedProjects);
       }
@@ -70,7 +74,8 @@ export default function ManageProjectsPage() {
   }, [state, toast]);
 
   const handleAddProject = () => {
-    const newId = (projects.length > 0 ? Math.max(...projects.map(p => parseInt(p.id))) + 1 : 1).toString();
+    // Generate a simple unique ID based on timestamp for new projects
+    const newId = `proj_${Date.now()}`;
     setProjects([...projects, { id: newId, title: '', description: '', techStack: '', repoUrl: '', liveUrl: '', imageUrl: '' }]);
   };
 
@@ -105,12 +110,7 @@ export default function ManageProjectsPage() {
             {projects.map(project => (
               <div key={project.id} className="space-y-4 rounded-lg border p-4">
                 <div className="flex items-center justify-between">
-                  <Input
-                    value={project.title}
-                    onChange={(e) => handleProjectChange(project.id, 'title', e.target.value)}
-                    placeholder="Project Title"
-                    className="text-lg font-semibold"
-                  />
+                   <h3 className="text-lg font-semibold">Project ID: {project.id}</h3>
                   <Button variant="ghost" size="icon" onClick={() => handleRemoveProject(project.id)}>
                     <Trash2 className="h-4 w-4 text-destructive" />
                     <span className="sr-only">Remove Project</span>
@@ -118,6 +118,13 @@ export default function ManageProjectsPage() {
                 </div>
                 
                 <div className="space-y-2">
+                  <Label>Title</Label>
+                  <Input
+                    value={project.title}
+                    onChange={(e) => handleProjectChange(project.id, 'title', e.target.value)}
+                    placeholder="Project Title"
+                  />
+
                   <Label>Description</Label>
                   <Textarea value={project.description} onChange={(e) => handleProjectChange(project.id, 'description', e.target.value)} placeholder="Project description..." />
                   

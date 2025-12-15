@@ -27,10 +27,17 @@ export function Projects({ showAll = false }: { showAll?: boolean }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getProjects().then(data => {
-      setProjects(data);
-      setLoading(false);
-    });
+    async function fetchProjects() {
+      try {
+        const data = await getProjects();
+        setProjects(data);
+      } catch (error) {
+        console.error("Failed to fetch projects:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProjects();
   }, []);
 
   const projectsToShow = showAll ? projects : projects.slice(0, 3);
@@ -42,13 +49,13 @@ export function Projects({ showAll = false }: { showAll?: boolean }) {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {[...Array(3)].map((_, i) => (
             <Card key={i} className="flex flex-col">
-              <CardHeader>
+              <CardHeader className="p-0">
                 <Skeleton className="h-[215px] w-full rounded-t-lg" />
-                <CardTitle className='pt-4'>
-                  <Skeleton className="h-8 w-3/4" />
-                </CardTitle>
+                 <div className="p-6">
+                    <Skeleton className="h-8 w-3/4" />
+                 </div>
               </CardHeader>
-              <CardContent className="flex-grow space-y-2">
+              <CardContent className="flex-grow space-y-2 p-6 pt-0">
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-5/6" />
                 <div className="mt-4 flex flex-wrap gap-2 pt-2">
@@ -73,7 +80,7 @@ export function Projects({ showAll = false }: { showAll?: boolean }) {
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {projectsToShow.map((project) => (
           <Card key={project.id} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2">
-            <CardHeader>
+            <CardHeader className="p-0">
               {project.imageUrl ? (
                 <div className="aspect-video overflow-hidden rounded-t-lg border-b">
                   <Image
@@ -90,9 +97,11 @@ export function Projects({ showAll = false }: { showAll?: boolean }) {
                   <ICONS.code className="h-16 w-16 text-muted-foreground" />
                 </div>
               )}
-              <CardTitle className="pt-4">{project.title}</CardTitle>
+               <div className="p-6 pb-0">
+                 <CardTitle>{project.title}</CardTitle>
+               </div>
             </CardHeader>
-            <CardContent className="flex-grow">
+            <CardContent className="flex-grow p-6">
               <p className="text-muted-foreground">{project.description}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {project.techStack.map((tech) => (
@@ -100,7 +109,7 @@ export function Projects({ showAll = false }: { showAll?: boolean }) {
                 ))}
               </div>
             </CardContent>
-            <CardFooter className="flex justify-end gap-2">
+            <CardFooter className="mt-auto flex justify-end gap-2 p-6 pt-0">
               {project.repoUrl && (
                 <Button asChild variant="ghost" size="sm">
                   <Link href={project.repoUrl} target="_blank">

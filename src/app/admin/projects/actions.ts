@@ -15,7 +15,7 @@ const projectSchema = z.object({
   imageUrl: z.string().url('Invalid URL format for image').or(z.literal('')),
 });
 
-const projectsSchema = z.object({
+const projectsFileSchema = z.object({
   projects: z.array(projectSchema),
 });
 
@@ -24,8 +24,9 @@ const projectsFilePath = path.join(process.cwd(), 'src/data/projects.json');
 export async function getProjects() {
   try {
     const data = await fs.readFile(projectsFilePath, 'utf-8');
-    const projects = JSON.parse(data);
-    return projectsSchema.parse(projects).projects;
+    const json = JSON.parse(data);
+    const parsed = projectsFileSchema.parse(json);
+    return parsed.projects;
   } catch (error) {
     console.error('Error reading projects data:', error);
     return [];
@@ -47,10 +48,10 @@ export async function updateProjects(
         : [],
     }));
 
-    const validation = projectsSchema.safeParse({ projects: updatedProjects });
+    const validation = projectsFileSchema.safeParse({ projects: updatedProjects });
 
     if (!validation.success) {
-      return { message: `Invalid data format: ${validation.error.flatten().fieldErrors}`, success: false };
+      return { message: `Invalid data format: ${JSON.stringify(validation.error.flatten().fieldErrors)}`, success: false };
     }
     
     await fs.writeFile(projectsFilePath, JSON.stringify(validation.data, null, 2));
