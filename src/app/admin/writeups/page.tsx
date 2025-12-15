@@ -139,7 +139,7 @@ export default function ManageWriteupsPage() {
                     <Label htmlFor={`writeupUrl-${item.id}`}>Write-Up URL</Label>
                     <Input
                       id={`writeupUrl-${item.id}`}
-                      className="peer peer-invalid:border-destructive peer-invalid:ring-destructive"
+                      className="peer"
                       type="url"
                       required
                       value={item.writeupUrl} 
