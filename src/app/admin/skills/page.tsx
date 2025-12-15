@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useEffect, useState, useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { getSkills, updateSkills } from './actions';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -32,7 +32,7 @@ export default function ManageSkillsPage() {
   const [nextId, setNextId] = useState(0);
   const { toast } = useToast();
 
-  const [state, formAction] = useFormState(updateSkills, {
+  const [state, formAction] = useActionState(updateSkills, {
     message: '',
     success: false,
   });
