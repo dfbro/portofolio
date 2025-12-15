@@ -7,8 +7,10 @@ import { Button } from '../ui/button';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
+const PREVIEW_COUNT = 3;
+
 export function Achievements({ showAll = false }: { showAll?: boolean }) {
-  const achievementsToShow = showAll ? ACHIEVEMENTS : ACHIEVEMENTS.slice(0, 3);
+  const achievementsToShow = showAll ? ACHIEVEMENTS : ACHIEVEMENTS.slice(0, PREVIEW_COUNT);
 
   return (
     <Section id="achievements" title="Achievements">
@@ -49,7 +51,7 @@ export function Achievements({ showAll = false }: { showAll?: boolean }) {
           </Card>
         ))}
       </div>
-      {!showAll && ACHIEVEMENTS.length > 3 && (
+      {!showAll && ACHIEVEMENTS.length > PREVIEW_COUNT && (
         <div className="mt-12 flex justify-center">
           <Button asChild>
             <Link href="/achievements">
