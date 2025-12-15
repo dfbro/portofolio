@@ -29,6 +29,7 @@ type SkillCategory = {
 
 export default function ManageSkillsPage() {
   const [skillCategories, setSkillCategories] = useState<SkillCategory[]>([]);
+  const [loading, setLoading] = useState(true);
   const [nextId, setNextId] = useState(0);
   const { toast } = useToast();
 
@@ -39,6 +40,7 @@ export default function ManageSkillsPage() {
 
   const fetchAndSetSkills = async () => {
     try {
+        setLoading(true);
         const response = await fetch('/api/skills');
         const data = await response.json();
         const formattedSkills = Object.entries(data).map(([category, skills], index) => ({
@@ -55,6 +57,8 @@ export default function ManageSkillsPage() {
             description: "Could not load skills data.",
             variant: "destructive"
         })
+    } finally {
+        setLoading(false);
     }
   };
 
@@ -115,50 +119,56 @@ export default function ManageSkillsPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={formAction} className="space-y-8">
-            <input type="hidden" name="skillsData" value={JSON.stringify(skillCategories.map(({ id, ...rest }) => rest))} />
-            {skillCategories.map(({ id, category, skills }) => (
-              <div key={id} className="space-y-3 rounded-lg border p-4">
-                <div className="flex items-center justify-between">
-                    <Label htmlFor={`category-${id}`} className="text-lg font-semibold">
-                    Category Name
-                    </Label>
-                    <Button variant="ghost" size="icon" onClick={() => handleRemoveCategory(id)}>
-                        <Trash2 className="h-4 w-4 text-destructive" />
-                        <span className="sr-only">Remove Category</span>
-                    </Button>
+          {loading ? (
+             <div className="flex justify-center items-center py-16">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+             </div>
+          ) : (
+            <form action={formAction} className="space-y-8">
+              <input type="hidden" name="skillsData" value={JSON.stringify(skillCategories.map(({ id, ...rest }) => rest))} />
+              {skillCategories.map(({ id, category, skills }) => (
+                <div key={id} className="space-y-3 rounded-lg border p-4">
+                  <div className="flex items-center justify-between">
+                      <Label htmlFor={`category-${id}`} className="text-lg font-semibold">
+                      Category Name
+                      </Label>
+                      <Button variant="ghost" size="icon" onClick={() => handleRemoveCategory(id)}>
+                          <Trash2 className="h-4 w-4 text-destructive" />
+                          <span className="sr-only">Remove Category</span>
+                      </Button>
+                  </div>
+                  <Input
+                    id={`category-${id}`}
+                    name={`category-${id}`}
+                    value={category}
+                    onChange={(e) => handleCategoryChange(id, e.target.value)}
+                    placeholder="e.g., Web Development"
+                    className="text-base"
+                  />
+
+                  <Label htmlFor={`skills-${id}`} className="text-md font-medium">
+                    Skills (comma-separated)
+                  </Label>
+                  <Textarea
+                    id={`skills-${id}`}
+                    name={`skills-${id}`}
+                    value={skills}
+                    onChange={(e) => handleSkillsChange(id, e.target.value)}
+                    rows={4}
+                    placeholder="e.g., React, Next.js, TypeScript"
+                  />
                 </div>
-                <Input
-                  id={`category-${id}`}
-                  name={`category-${id}`}
-                  value={category}
-                  onChange={(e) => handleCategoryChange(id, e.target.value)}
-                  placeholder="e.g., Web Development"
-                  className="text-base"
-                />
-
-                <Label htmlFor={`skills-${id}`} className="text-md font-medium">
-                  Skills (comma-separated)
-                </Label>
-                <Textarea
-                  id={`skills-${id}`}
-                  name={`skills-${id}`}
-                  value={skills}
-                  onChange={(e) => handleSkillsChange(id, e.target.value)}
-                  rows={4}
-                  placeholder="e.g., React, Next.js, TypeScript"
-                />
+              ))}
+              
+              <div className="flex flex-col md:flex-row gap-4">
+                  <Button type="button" variant="outline" onClick={handleAddCategory}>
+                      <Plus className="mr-2 h-4 w-4" /> Add New Category
+                  </Button>
+                  <SubmitButton />
               </div>
-            ))}
-            
-            <div className="flex flex-col md:flex-row gap-4">
-                <Button type="button" variant="outline" onClick={handleAddCategory}>
-                    <Plus className="mr-2 h-4 w-4" /> Add New Category
-                </Button>
-                <SubmitButton />
-            </div>
 
-          </form>
+            </form>
+          )}
         </CardContent>
       </Card>
     </div>

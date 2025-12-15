@@ -34,6 +34,7 @@ type Project = {
 
 export default function ManageProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
   const [state, formAction] = useActionState(updateProjects, {
@@ -43,6 +44,7 @@ export default function ManageProjectsPage() {
 
   const fetchAndSetProjects = async () => {
     try {
+        setLoading(true);
         const response = await fetch('/api/projects');
         const data = await response.json();
         const formattedProjects = data.map((p: any) => ({
@@ -59,6 +61,8 @@ export default function ManageProjectsPage() {
             description: "Could not load projects data.",
             variant: "destructive"
         })
+    } finally {
+        setLoading(false);
     }
   };
 
@@ -80,7 +84,6 @@ export default function ManageProjectsPage() {
   }, [state, toast]);
 
   const handleAddProject = () => {
-    // Generate a simple unique ID based on timestamp for new projects
     const newId = `proj_${Date.now()}`;
     setProjects([...projects, { id: newId, title: '', description: '', techStack: '', repoUrl: '', liveUrl: '', imageUrl: '' }]);
   };
@@ -110,52 +113,58 @@ export default function ManageProjectsPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={formAction} className="space-y-8">
-            <input type="hidden" name="projectsData" value={JSON.stringify(projects)} />
-            
-            {projects.map(project => (
-              <div key={project.id} className="space-y-4 rounded-lg border p-4">
-                <div className="flex items-center justify-between">
-                   <h3 className="text-lg font-semibold">Project ID: {project.id}</h3>
-                  <Button variant="ghost" size="icon" onClick={() => handleRemoveProject(project.id)}>
-                    <Trash2 className="h-4 w-4 text-destructive" />
-                    <span className="sr-only">Remove Project</span>
-                  </Button>
-                </div>
-                
-                <div className="space-y-2">
-                  <Label>Title</Label>
-                  <Input
-                    value={project.title}
-                    onChange={(e) => handleProjectChange(project.id, 'title', e.target.value)}
-                    placeholder="Project Title"
-                  />
-
-                  <Label>Description</Label>
-                  <Textarea value={project.description} onChange={(e) => handleProjectChange(project.id, 'description', e.target.value)} placeholder="Project description..." />
+          {loading ? (
+             <div className="flex justify-center items-center py-16">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+             </div>
+          ) : (
+            <form action={formAction} className="space-y-8">
+              <input type="hidden" name="projectsData" value={JSON.stringify(projects)} />
+              
+              {projects.map(project => (
+                <div key={project.id} className="space-y-4 rounded-lg border p-4">
+                  <div className="flex items-center justify-between">
+                     <h3 className="text-lg font-semibold">Project ID: {project.id}</h3>
+                    <Button variant="ghost" size="icon" onClick={() => handleRemoveProject(project.id)}>
+                      <Trash2 className="h-4 w-4 text-destructive" />
+                      <span className="sr-only">Remove Project</span>
+                    </Button>
+                  </div>
                   
-                  <Label>Tech Stack (comma-separated)</Label>
-                  <Input value={project.techStack} onChange={(e) => handleProjectChange(project.id, 'techStack', e.target.value)} placeholder="React, Next.js, etc." />
+                  <div className="space-y-2">
+                    <Label>Title</Label>
+                    <Input
+                      value={project.title}
+                      onChange={(e) => handleProjectChange(project.id, 'title', e.target.value)}
+                      placeholder="Project Title"
+                    />
 
-                  <Label>Repository URL</Label>
-                  <Input value={project.repoUrl} onChange={(e) => handleProjectChange(project.id, 'repoUrl', e.target.value)} placeholder="https://github.com/user/repo" />
+                    <Label>Description</Label>
+                    <Textarea value={project.description} onChange={(e) => handleProjectChange(project.id, 'description', e.target.value)} placeholder="Project description..." />
+                    
+                    <Label>Tech Stack (comma-separated)</Label>
+                    <Input value={project.techStack} onChange={(e) => handleProjectChange(project.id, 'techStack', e.target.value)} placeholder="React, Next.js, etc." />
 
-                  <Label>Live Demo URL (optional)</Label>
-                  <Input value={project.liveUrl} onChange={(e) => handleProjectChange(project.id, 'liveUrl', e.target.value)} placeholder="https://project-demo.com" />
+                    <Label>Repository URL</Label>
+                    <Input value={project.repoUrl} onChange={(e) => handleProjectChange(project.id, 'repoUrl', e.target.value)} placeholder="https://github.com/user/repo" />
 
-                  <Label>Image URL (optional)</Label>
-                  <Input value={project.imageUrl} onChange={(e) => handleProjectChange(project.id, 'imageUrl', e.target.value)} placeholder="https://image-url.com/image.png" />
+                    <Label>Live Demo URL (optional)</Label>
+                    <Input value={project.liveUrl} onChange={(e) => handleProjectChange(project.id, 'liveUrl', e.target.value)} placeholder="https://project-demo.com" />
+
+                    <Label>Image URL (optional)</Label>
+                    <Input value={project.imageUrl} onChange={(e) => handleProjectChange(project.id, 'imageUrl', e.target.value)} placeholder="https://image-url.com/image.png" />
+                  </div>
                 </div>
+              ))}
+              
+              <div className="flex flex-col md:flex-row gap-4">
+                <Button type="button" variant="outline" onClick={handleAddProject}>
+                  <Plus className="mr-2 h-4 w-4" /> Add New Project
+                </Button>
+                <SubmitButton />
               </div>
-            ))}
-            
-            <div className="flex flex-col md:flex-row gap-4">
-              <Button type="button" variant="outline" onClick={handleAddProject}>
-                <Plus className="mr-2 h-4 w-4" /> Add New Project
-              </Button>
-              <SubmitButton />
-            </div>
-          </form>
+            </form>
+          )}
         </CardContent>
       </Card>
     </div>
