@@ -65,6 +65,14 @@ export const PROJECTS = [
     repoUrl: '#',
     image: findImage('project-3'),
   },
+  {
+    title: 'Real-time Chat App',
+    description: 'A real-time chat application using WebSockets for instant messaging and presence.',
+    techStack: ['React', 'Node.js', 'Socket.IO', 'MongoDB'],
+    liveUrl: '#',
+    repoUrl: '#',
+    image: findImage('project-4'),
+  }
 ];
 
 export const ACHIEVEMENTS = [
