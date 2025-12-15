@@ -4,6 +4,11 @@ const appHostname = process.env.APP_HOSTNAME || 'localhost:9002';
 const protocol = process.env.APP_SSL === 'true' ? 'https' : 'http';
 
 const nextConfig: NextConfig = {
+  experimental: {
+    serverActions: {
+      allowedForwardedHosts: [appHostname],
+    },
+  },
   async headers() {
     return [
       {
