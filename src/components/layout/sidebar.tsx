@@ -19,9 +19,6 @@ export function Sidebar() {
   const [isSheetOpen, setSheetOpen] = useState(false);
 
   const getLinkClass = (href: string) => {
-    // Check if it's a section link on the homepage
-    const isHomepageSectionLink = href.startsWith('/#');
-    
     // For the homepage, the link is active only if the path is exactly "/"
     if (href === '/') {
         return cn(
@@ -33,8 +30,9 @@ export function Sidebar() {
     }
     
     // For other pages, check if the pathname starts with the href
-    // but ignore homepage section links
-    if (!isHomepageSectionLink) {
+    // This handles nested routes correctly.
+    // We also make sure the href is not just a homepage section link
+    if (!href.startsWith('/#')) {
         return cn(
             'flex items-center gap-3 rounded-lg px-3 py-2 text-sidebar-foreground transition-all hover:text-sidebar-primary-foreground hover:bg-sidebar-accent',
             {
@@ -111,7 +109,7 @@ export function Sidebar() {
               <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="flex flex-col bg-sidebar text-sidebar-foreground w-3/4">
+          <SheetContent side="left" className="flex flex-col bg-sidebar text-sidebar-foreground w-3/4 p-0">
             <SidebarContent />
           </SheetContent>
         </Sheet>
