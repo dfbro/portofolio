@@ -14,7 +14,7 @@ export async function authenticate(
     
     if (password === SECRET_PASS) {
       const session = { isLoggedIn: true, expires: Date.now() + 24 * 60 * 60 * 1000 };
-      const cookieStore = cookies();
+      const cookieStore = await cookies();
       cookieStore.set('session', JSON.stringify(session), {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
@@ -34,7 +34,7 @@ export async function authenticate(
 }
 
 export async function logout() {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   cookieStore.delete('session');
   redirect('/admin');
 }
