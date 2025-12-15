@@ -12,12 +12,12 @@ import data from './placeholder-images.json';
 const PlaceHolderImages = data.placeholderImages;
 
 export const NAV_LINKS = [
-  { name: 'Home', href: '#home' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'CTF', href: '#ctf' },
-  { name: 'Blog', href: '#blog' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Home', href: '/' },
+  { name: 'Projects', href: '/#projects' },
+  { name: 'Skills', href: '/#skills' },
+  { name: 'CTF', href: '/#ctf' },
+  { name: 'Blog', href: '/#blog' },
+  { name: 'Contact', href: '/#contact' },
 ];
 
 export const SOCIAL_LINKS: { name: string; url: string; icon: LucideIcon }[] = [
