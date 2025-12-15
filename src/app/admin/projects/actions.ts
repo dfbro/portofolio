@@ -10,9 +10,9 @@ const projectSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   description: z.string().min(1, 'Description is required'),
   techStack: z.array(z.string()),
-  repoUrl: z.string().url('Invalid URL format for repository').or(z.literal('')),
-  liveUrl: z.string().url('Invalid URL format for live demo').or(z.literal('')),
-  imageUrl: z.string().url('Invalid URL format for image').or(z.literal('')),
+  repoUrl: z.string().url('Invalid URL format for repository').or(z.literal('')).or(z.literal('#')),
+  liveUrl: z.string().url('Invalid URL format for live demo').or(z.literal('')).or(z.literal('#')),
+  imageUrl: z.string().url('Invalid URL format for image').or(z.literal('')).or(z.literal('#')),
 });
 
 const projectsFileSchema = z.object({
