@@ -6,7 +6,10 @@ import { Sidebar } from '@/components/layout/sidebar';
 
 const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' });
 
+const appUrl = process.env.APP_URL || 'http://localhost:9002';
+
 export const metadata: Metadata = {
+  metadataBase: new URL(appUrl),
   title: 'Binary Canvas',
   description: 'Portfolio of a Web Developer and CTF Player',
 };
