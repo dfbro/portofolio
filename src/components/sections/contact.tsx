@@ -21,6 +21,7 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 export function Contact() {
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
+  const email = process.env.NEXT_PUBLIC_EMAIL || 'alex.doe@email.com';
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -56,12 +57,12 @@ export function Contact() {
         <div className="flex flex-col">
           <h3 className="text-2xl font-bold">Contact Me</h3>
           <p className="mt-2 text-muted-foreground">
-            Have a project in mind, a question, or just want to say hi? Feel free to reach out. I'm always open to discussing new opportunities.
+            Have a project in mind, a question, or just want to say hi? Feel free to reach out. I\'m always open to discussing new opportunities.
           </p>
           <div className="mt-8 space-y-4">
-            <a href="mailto:alex.doe@email.com" className="flex items-center gap-4 text-muted-foreground transition-colors hover:text-primary">
+            <a href={`mailto:${email}`} className="flex items-center gap-4 text-muted-foreground transition-colors hover:text-primary">
               <Mail className="h-6 w-6" />
-              <span>alex.doe@email.com</span>
+              <span>{email}</span>
             </a>
             {SOCIAL_LINKS.map(social => (
                 <a href={social.url} key={social.name} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-muted-foreground transition-colors hover:text-primary">

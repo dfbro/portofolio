@@ -23,17 +23,17 @@ export const NAV_LINKS = [
 export const SOCIAL_LINKS: { name: string; url: string; icon: LucideIcon }[] = [
   {
     name: 'GitHub',
-    url: 'https://github.com',
+    url: process.env.NEXT_PUBLIC_GITHUB_URL || 'https://github.com',
     icon: Github,
   },
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com',
+    url: process.env.NEXT_PUBLIC_LINKEDIN_URL || 'https://linkedin.com',
     icon: Linkedin,
   },
   {
     name: 'Twitter',
-    url: 'https://twitter.com',
+    url: process.env.NEXT_PUBLIC_TWITTER_URL || 'https://twitter.com',
     icon: Twitter,
   },
 ];
