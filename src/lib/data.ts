@@ -12,7 +12,7 @@ import data from './placeholder-images.json';
 const PlaceHolderImages = data.placeholderImages;
 
 export const NAV_LINKS = [
-  { name: 'Home', href: '/#home' },
+  { name: 'Home', href: '/' },
   { name: 'Projects', href: '/projects' },
   { name: 'Skills', href: '/#skills' },
   { name: 'Achievements', href: '/achievements' },
@@ -55,7 +55,7 @@ export const PROJECTS = [
     techStack: ['React', 'Vite', 'Recharts', 'Zustand', 'Firebase'],
     liveUrl: '#',
     repoUrl: '#',
-image: findImage('project-2'),
+    image: findImage('project-2'),
   },
   {
     title: 'Portfolio API',
@@ -64,14 +64,6 @@ image: findImage('project-2'),
     liveUrl: '#',
     repoUrl: '#',
     image: findImage('project-3'),
-  },
-    {
-    title: 'Another Project',
-    description: 'A description for another project.',
-    techStack: ['Tech 1', 'Tech 2', 'Tech 3'],
-    liveUrl: '#',
-    repoUrl: '#',
-    image: findImage('project-1'),
   },
 ];
 
@@ -99,6 +91,14 @@ export const ACHIEVEMENTS = [
     date: '2021',
     url: '#',
     image: findImage('achievement-3'),
+  },
+  {
+    title: 'Security+ Certified',
+    description: 'CompTIA Security+ Certification',
+    organization: 'CompTIA',
+    date: '2020',
+    url: '#',
+    image: findImage('achievement-1'),
   },
 ];
 
