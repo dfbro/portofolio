@@ -1,0 +1,62 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "title": "E-commerce Platform",
+      "description": "A full-stack e-commerce solution with a custom CMS and payment gateway integration.",
+      "techStack": [
+        "Next.js",
+        "TypeScript",
+        "Stripe",
+        "PostgreSQL",
+        "Tailwind CSS"
+      ],
+      "liveUrl": "#",
+      "repoUrl": "#",
+      "imageUrl": "https://images.unsplash.com/photo-1760548425298-22aa4b60fc16?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMGNvZGV8ZW58MHx8fHwxNzY1NzgyNzY5fDA&ixlib=rb-4.1.0&q=80&w=1080"
+    },
+    {
+      "id": "2",
+      "title": "SaaS Dashboard",
+      "description": "A responsive dashboard for a SaaS application, featuring data visualization and user management.",
+      "techStack": [
+        "React",
+        "Vite",
+        "Recharts",
+        "Zustand",
+        "Firebase"
+      ],
+      "liveUrl": "#",
+      "repoUrl": "#",
+      "imageUrl": "https://images.unsplash.com/photo-1583932692875-a42450d50acf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx3ZWIlMjBkYXNoYm9hcmR8ZW58MHx8fHwxNzY1Nzg4NjAzfDA&ixlib=rb-4.1.0&q=80&w=1080"
+    },
+    {
+      "id": "3",
+      "title": "Portfolio API",
+      "description": "A headless GraphQL API to power this portfolio, built with Node.js and Apollo Server.",
+      "techStack": [
+        "Node.js",
+        "GraphQL",
+        "Apollo Server",
+        "Docker"
+      ],
+      "liveUrl": "",
+      "repoUrl": "#",
+      "imageUrl": "https://images.unsplash.com/photo-1688561807381-05137151978f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxlY29tbWVyY2UlMjBsYXB0b3B8ZW58MHx8fHwxNzY1Nzg4NjAzfDA&ixlib=rb-4.1.0&q=80&w=1080"
+    },
+    {
+      "id": "4",
+      "title": "Real-time Chat App",
+      "description": "A real-time chat application using WebSockets for instant messaging and presence.",
+      "techStack": [
+        "React",
+        "Node.js",
+        "Socket.IO",
+        "MongoDB"
+      ],
+      "liveUrl": "#",
+      "repoUrl": "#",
+      "imageUrl": "https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjaGF0JTIwYXBwfGVufDB8fHx8fDE3NjU4NTM0MTV8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    }
+  ]
+}

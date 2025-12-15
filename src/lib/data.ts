@@ -40,41 +40,6 @@ export const SOCIAL_LINKS: { name: string; url: string; icon: LucideIcon }[] = [
 
 const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
-export const PROJECTS = [
-  {
-    title: 'E-commerce Platform',
-    description: 'A full-stack e-commerce solution with a custom CMS and payment gateway integration.',
-    techStack: ['Next.js', 'TypeScript', 'Stripe', 'PostgreSQL', 'Tailwind CSS'],
-    liveUrl: '#',
-    repoUrl: '#',
-    image: findImage('project-1'),
-  },
-  {
-    title: 'SaaS Dashboard',
-    description: 'A responsive dashboard for a SaaS application, featuring data visualization and user management.',
-    techStack: ['React', 'Vite', 'Recharts', 'Zustand', 'Firebase'],
-    liveUrl: '#',
-    repoUrl: '#',
-image: findImage('project-2'),
-  },
-  {
-    title: 'Portfolio API',
-    description: 'A headless GraphQL API to power this portfolio, built with Node.js and Apollo Server.',
-    techStack: ['Node.js', 'GraphQL', 'Apollo Server', 'Docker'],
-    liveUrl: '#',
-    repoUrl: '#',
-    image: findImage('project-3'),
-  },
-  {
-    title: 'Real-time Chat App',
-    description: 'A real-time chat application using WebSockets for instant messaging and presence.',
-    techStack: ['React', 'Node.js', 'Socket.IO', 'MongoDB'],
-    liveUrl: '#',
-    repoUrl: '#',
-    image: findImage('project-4'),
-  }
-];
-
 export const ACHIEVEMENTS = [
   {
     title: 'Google Cloud Certified',

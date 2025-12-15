@@ -16,7 +16,7 @@ export default function AdminDashboardPage() {
             <Link href="/admin/skills">Manage Skills</Link>
           </Button>
           <Button asChild variant="outline" className="w-full justify-start">
-            <Link href="#">Manage Projects</Link>
+            <Link href="/admin/projects">Manage Projects</Link>
           </Button>
           <Button asChild variant="outline" className="w-full justify-start">
             <Link href="#">Manage Achievements</Link>
