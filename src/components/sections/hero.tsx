@@ -1,12 +1,27 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export function Hero() {
   const portfolioName = process.env.NEXT_PUBLIC_PORTFOLIO_NAME || "Alex Doe";
+  const profilePictureUrl = process.env.NEXT_PUBLIC_PROFILE_PICTURE_URL;
 
   return (
     <section id="home" className="container flex flex-col items-center justify-center py-24 text-center sm:py-32 md:py-48">
+      {profilePictureUrl && (
+        <div className="mb-8">
+            <Image 
+                src={profilePictureUrl}
+                alt={portfolioName}
+                width={128}
+                height={128}
+                className="rounded-full object-cover shadow-lg"
+                data-ai-hint="profile picture"
+                priority
+            />
+        </div>
+      )}
       <h1 className="font-headline text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
         {portfolioName}
       </h1>
