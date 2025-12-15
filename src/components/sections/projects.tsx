@@ -21,6 +21,65 @@ type Project = {
   imageUrl?: string;
 };
 
+function ProjectCard({ project }: { project: Project }) {
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    setImageError(false);
+  }, [project.imageUrl]);
+
+  return (
+    <Card className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2">
+      <CardHeader className="p-0">
+        {project.imageUrl && !imageError ? (
+          <div className="aspect-video overflow-hidden rounded-t-lg border-b">
+            <Image
+              src={project.imageUrl}
+              alt={project.title}
+              width={600}
+              height={400}
+              className="h-full w-full object-cover"
+              data-ai-hint="project image"
+              onError={() => setImageError(true)}
+            />
+          </div>
+        ) : (
+          <div className="aspect-video overflow-hidden rounded-t-lg border-b bg-muted flex items-center justify-center">
+            <ICONS.code className="h-16 w-16 text-muted-foreground" />
+          </div>
+        )}
+        <div className="p-6 pb-0">
+          <CardTitle>{project.title}</CardTitle>
+        </div>
+      </CardHeader>
+      <CardContent className="flex-grow p-6">
+        <p className="text-muted-foreground">{project.description}</p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {project.techStack.map((tech) => (
+            <Badge key={tech} variant="secondary">{tech}</Badge>
+          ))}
+        </div>
+      </CardContent>
+      <CardFooter className="mt-auto flex justify-end gap-2 p-6 pt-0">
+        {project.repoUrl && project.repoUrl !== '#' && (
+          <Button asChild variant="ghost" size="sm">
+            <Link href={project.repoUrl} target="_blank">
+              <ICONS.github className="mr-2" /> Code
+            </Link>
+          </Button>
+        )}
+        {project.liveUrl && project.liveUrl !== '#' && (
+          <Button asChild variant="default" size="sm">
+            <Link href={project.liveUrl} target="_blank">
+              <ICONS.globe className="mr-2" /> Live Demo
+            </Link>
+          </Button>
+        )}
+      </CardFooter>
+    </Card>
+  );
+}
+
 export function Projects({ showAll = false }: { showAll?: boolean }) {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
@@ -94,53 +153,7 @@ export function Projects({ showAll = false }: { showAll?: boolean }) {
     <Section id="projects" title="Projects">
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {projectsToShow.map((project) => (
-          <Card key={project.id} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2">
-            <CardHeader className="p-0">
-              {project.imageUrl ? (
-                <div className="aspect-video overflow-hidden rounded-t-lg border-b">
-                  <Image
-                    src={project.imageUrl}
-                    alt={project.title}
-                    width={600}
-                    height={400}
-                    className="h-full w-full object-cover"
-                    data-ai-hint="project image"
-                  />
-                </div>
-              ) : (
-                <div className="aspect-video overflow-hidden rounded-t-lg border-b bg-muted flex items-center justify-center">
-                  <ICONS.code className="h-16 w-16 text-muted-foreground" />
-                </div>
-              )}
-               <div className="p-6 pb-0">
-                 <CardTitle>{project.title}</CardTitle>
-               </div>
-            </CardHeader>
-            <CardContent className="flex-grow p-6">
-              <p className="text-muted-foreground">{project.description}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {project.techStack.map((tech) => (
-                  <Badge key={tech} variant="secondary">{tech}</Badge>
-                ))}
-              </div>
-            </CardContent>
-            <CardFooter className="mt-auto flex justify-end gap-2 p-6 pt-0">
-              {project.repoUrl && (
-                <Button asChild variant="ghost" size="sm">
-                  <Link href={project.repoUrl} target="_blank">
-                    <ICONS.github className="mr-2" /> Code
-                  </Link>
-                </Button>
-              )}
-              {project.liveUrl && (
-                <Button asChild variant="default" size="sm">
-                  <Link href={project.liveUrl} target="_blank">
-                    <ICONS.globe className="mr-2" /> Live Demo
-                  </Link>
-                </Button>
-              )}
-            </CardFooter>
-          </Card>
+          <ProjectCard key={project.id} project={project} />
         ))}
       </div>
       {!showAll && totalProjects > 3 && (
