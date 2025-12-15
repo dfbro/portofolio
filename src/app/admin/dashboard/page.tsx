@@ -19,7 +19,7 @@ export default function AdminDashboardPage() {
             <Link href="/admin/projects">Manage Projects</Link>
           </Button>
           <Button asChild variant="outline" className="w-full justify-start">
-            <Link href="#">Manage Achievements</Link>
+            <Link href="/admin/achievements">Manage Achievements</Link>
           </Button>
           <Button asChild variant="outline" className="w-full justify-start">
             <Link href="#">Manage WriteUps</Link>

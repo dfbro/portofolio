@@ -1,57 +1,139 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { ACHIEVEMENTS } from '@/lib/data';
 import { Section } from './section-wrapper';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Loader2 } from 'lucide-react';
+import { PlaceHolderImages } from '@/lib/data';
+import { Skeleton } from '../ui/skeleton';
 
 const PREVIEW_COUNT = 3;
 
+type Achievement = {
+  id: string;
+  title: string;
+  description: string;
+  organization: string;
+  date: string;
+  url?: string;
+  imageId: string;
+};
+
 export function Achievements({ showAll = false }: { showAll?: boolean }) {
-  const achievementsToShow = showAll ? ACHIEVEMENTS : ACHIEVEMENTS.slice(0, PREVIEW_COUNT);
+  const [achievements, setAchievements] = useState<Achievement[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchAchievements() {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/achievements');
+        if (!response.ok) {
+          throw new Error('Failed to fetch achievements');
+        }
+        const data = await response.json();
+        setAchievements(data);
+        setError(null);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An unknown error occurred');
+        console.error("Failed to fetch achievements:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchAchievements();
+  }, []);
+
+  const achievementsToShow = showAll ? achievements : achievements.slice(0, PREVIEW_COUNT);
+  const totalAchievements = achievements.length;
+
+  const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
+
+  if (loading) {
+    return (
+      <Section id="achievements" title="Achievements">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {[...Array(3)].map((_, i) => (
+            <Card key={i} className="flex flex-col">
+              <CardHeader className="p-0">
+                <Skeleton className="h-[215px] w-full rounded-t-lg" />
+                 <div className="p-6">
+                    <Skeleton className="h-8 w-3/4" />
+                 </div>
+              </CardHeader>
+              <CardContent className="flex-grow space-y-2 p-6 pt-0">
+                <Skeleton className="h-4 w-full" />
+                <div className="mt-4 flex flex-wrap gap-2 pt-2">
+                  <Skeleton className="h-6 w-24 rounded-full" />
+                  <Skeleton className="h-6 w-16 rounded-full" />
+                </div>
+              </CardContent>
+              <CardFooter className="flex justify-end">
+                <Skeleton className="h-9 w-32" />
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      </Section>
+    );
+  }
+
+  if (error) {
+    return (
+      <Section id="achievements" title="Achievements">
+        <p className="text-center text-destructive">{error}</p>
+      </Section>
+    )
+  }
 
   return (
     <Section id="achievements" title="Achievements">
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {achievementsToShow.map((achievement) => (
-          <Card key={achievement.title} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2">
-            <CardHeader>
-              {achievement.image && (
-                <div className="aspect-video overflow-hidden rounded-t-lg border-b">
-                  <Image
-                    src={achievement.image.imageUrl}
-                    alt={achievement.title}
-                    width={600}
-                    height={400}
-                    className="h-full w-full object-cover"
-                    data-ai-hint={achievement.image.imageHint}
-                  />
+        {achievementsToShow.map((achievement) => {
+          const image = findImage(achievement.imageId);
+          return (
+            <Card key={achievement.id} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2">
+              <CardHeader>
+                {image && (
+                  <div className="aspect-video overflow-hidden rounded-t-lg border-b">
+                    <Image
+                      src={image.imageUrl}
+                      alt={achievement.title}
+                      width={600}
+                      height={400}
+                      className="h-full w-full object-cover"
+                      data-ai-hint={image.imageHint}
+                    />
+                  </div>
+                )}
+                <CardTitle className="pt-4">{achievement.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-muted-foreground">{achievement.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <Badge variant="secondary">{achievement.organization}</Badge>
+                  <Badge variant="secondary">{achievement.date}</Badge>
                 </div>
+              </CardContent>
+              {achievement.url && achievement.url !== '#' && (
+                <CardFooter className="flex justify-end">
+                  <Button asChild variant="outline" size="sm">
+                    <Link href={achievement.url} target="_blank">
+                      Download Certificate
+                    </Link>
+                  </Button>
+                </CardFooter>
               )}
-              <CardTitle className="pt-4">{achievement.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="flex-grow">
-              <p className="text-muted-foreground">{achievement.description}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <Badge variant="secondary">{achievement.organization}</Badge>
-                <Badge variant="secondary">{achievement.date}</Badge>
-              </div>
-            </CardContent>
-            {achievement.url && (
-              <CardFooter className="flex justify-end">
-                <Button asChild variant="outline" size="sm">
-                  <Link href={achievement.url} target="_blank">
-                    View Certificate
-                  </Link>
-                </Button>
-              </CardFooter>
-            )}
-          </Card>
-        ))}
+            </Card>
+          );
+        })}
       </div>
-      {!showAll && ACHIEVEMENTS.length > PREVIEW_COUNT && (
+      {!showAll && totalAchievements > PREVIEW_COUNT && (
         <div className="mt-12 flex justify-center">
           <Button asChild>
             <Link href="/achievements">

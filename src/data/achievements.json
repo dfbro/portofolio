@@ -1,0 +1,40 @@
+{
+  "achievements": [
+    {
+      "id": "achieve-1",
+      "title": "Google Cloud Certified",
+      "description": "Associate Cloud Engineer",
+      "organization": "Google",
+      "date": "2023",
+      "url": "#",
+      "imageId": "achievement-1"
+    },
+    {
+      "id": "achieve-2",
+      "title": "Certified Kubernetes Administrator",
+      "description": "CKA Certification",
+      "organization": "The Linux Foundation",
+      "date": "2022",
+      "url": "#",
+      "imageId": "achievement-2"
+    },
+    {
+      "id": "achieve-3",
+      "title": "AWS Certified Solutions Architect",
+      "description": "Associate",
+      "organization": "Amazon Web Services",
+      "date": "2021",
+      "url": "#",
+      "imageId": "achievement-3"
+    },
+    {
+      "id": "achieve-4",
+      "title": "Security+ Certified",
+      "description": "CompTIA Security+ Certification",
+      "organization": "CompTIA",
+      "date": "2020",
+      "url": "#",
+      "imageId": "achievement-1"
+    }
+  ]
+}
