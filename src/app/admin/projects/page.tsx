@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
-import { getProjects, updateProjects } from './actions';
+import { updateProjects } from './actions';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -41,18 +41,25 @@ export default function ManageProjectsPage() {
     success: false,
   });
 
-  const fetchAndSetProjects = () => {
-    getProjects().then(data => {
-      if (data) {
-        const formattedProjects = data.map(p => ({
+  const fetchAndSetProjects = async () => {
+    try {
+        const response = await fetch('/api/projects');
+        const data = await response.json();
+        const formattedProjects = data.map((p: any) => ({
           ...p,
           techStack: Array.isArray(p.techStack) ? p.techStack.join(', ') : '',
           liveUrl: p.liveUrl ?? '',
           imageUrl: p.imageUrl ?? '',
         }));
         setProjects(formattedProjects);
-      }
-    });
+    } catch (error) {
+        console.error("Failed to fetch projects for admin page", error);
+        toast({
+            title: "Error",
+            description: "Could not load projects data.",
+            variant: "destructive"
+        })
+    }
   };
 
   useEffect(() => {

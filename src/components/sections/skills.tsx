@@ -8,20 +8,29 @@ import { aiHighlightSkills } from '@/ai/flows/highlight-skills';
 import { Loader2, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { getSkills } from '@/app/admin/skills/actions';
 
 export function Skills({ showMoreButton = false }: { showMoreButton?: boolean }) {
   const [skillsData, setSkillsData] = useState<Record<string, string[]>>({});
   const [viewedSkills, setViewedSkills] = useState<string[]>([]);
   const [highlightedSkills, setHighlightedSkills] = useState<string[]>([]);
   const [isPending, startTransition] = useTransition();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getSkills().then(data => {
-        if (data) {
-            setSkillsData(data);
-        }
-    });
+    const fetchSkills = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/skills');
+        const data = await response.json();
+        setSkillsData(data);
+      } catch (error) {
+        console.error('Failed to fetch skills:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSkills();
   }, []);
 
   useEffect(() => {
@@ -45,28 +54,34 @@ export function Skills({ showMoreButton = false }: { showMoreButton?: boolean })
             {isPending && <Loader2 className="ml-2 inline-block h-4 w-4 animate-spin" />}
         </p>
        </div>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        {Object.entries(skillsData).map(([category, skills]) => (
-          <Card key={category} className="transition-shadow hover:shadow-lg">
-            <CardHeader>
-              <CardTitle>{category}</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-wrap gap-2">
-              {skills.map((skill) => (
-                <Badge
-                  key={skill}
-                  variant={highlightedSkills.includes(skill) ? 'default' : 'secondary'}
-                  className="cursor-pointer text-base transition-all hover:scale-105 active:scale-95"
-                  onClick={() => handleSkillClick(skill)}
-                  aria-pressed={highlightedSkills.includes(skill)}
-                >
-                  {skill}
-                </Badge>
-              ))}
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      {loading ? (
+         <div className="flex justify-center">
+            <Loader2 className="h-8 w-8 animate-spin" />
+         </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+            {Object.entries(skillsData).map(([category, skills]) => (
+            <Card key={category} className="transition-shadow hover:shadow-lg">
+                <CardHeader>
+                <CardTitle>{category}</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-wrap gap-2">
+                {skills.map((skill) => (
+                    <Badge
+                    key={skill}
+                    variant={highlightedSkills.includes(skill) ? 'default' : 'secondary'}
+                    className="cursor-pointer text-base transition-all hover:scale-105 active:scale-95"
+                    onClick={() => handleSkillClick(skill)}
+                    aria-pressed={highlightedSkills.includes(skill)}
+                    >
+                    {skill}
+                    </Badge>
+                ))}
+                </CardContent>
+            </Card>
+            ))}
+        </div>
+      )}
       {showMoreButton && (
         <div className="mt-12 flex justify-center">
           <Button asChild>

@@ -9,7 +9,6 @@ import { ICONS } from '@/lib/data';
 import { Section } from './section-wrapper';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { getProjects } from '@/app/admin/projects/actions';
 import { Skeleton } from '@/components/ui/skeleton';
 
 type Project = {
@@ -25,14 +24,22 @@ type Project = {
 export function Projects({ showAll = false }: { showAll?: boolean }) {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const data = await getProjects();
+        setLoading(true);
+        const response = await fetch('/api/projects');
+        if (!response.ok) {
+          throw new Error('Failed to fetch projects');
+        }
+        const data = await response.json();
         setProjects(data);
-      } catch (error) {
-        console.error("Failed to fetch projects:", error);
+        setError(null);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An unknown error occurred');
+        console.error("Failed to fetch projects:", err);
       } finally {
         setLoading(false);
       }
@@ -73,6 +80,14 @@ export function Projects({ showAll = false }: { showAll?: boolean }) {
         </div>
       </Section>
     );
+  }
+
+  if (error) {
+    return (
+      <Section id="projects" title="Projects">
+        <p className="text-center text-destructive">{error}</p>
+      </Section>
+    )
   }
 
   return (

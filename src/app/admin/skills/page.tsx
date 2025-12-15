@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
-import { getSkills, updateSkills } from './actions';
+import { updateSkills } from './actions';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -37,18 +37,29 @@ export default function ManageSkillsPage() {
     success: false,
   });
 
-  useEffect(() => {
-    getSkills().then(data => {
-      if (data) {
+  const fetchAndSetSkills = async () => {
+    try {
+        const response = await fetch('/api/skills');
+        const data = await response.json();
         const formattedSkills = Object.entries(data).map(([category, skills], index) => ({
-          id: index,
-          category,
-          skills: skills.join(', '),
+            id: index,
+            category,
+            skills: (skills as string[]).join(', '),
         }));
         setSkillCategories(formattedSkills);
         setNextId(formattedSkills.length);
-      }
-    });
+    } catch (error) {
+        console.error("Failed to fetch skills for admin page", error);
+        toast({
+            title: "Error",
+            description: "Could not load skills data.",
+            variant: "destructive"
+        })
+    }
+  };
+
+  useEffect(() => {
+    fetchAndSetSkills();
   }, []);
 
   useEffect(() => {
@@ -59,17 +70,7 @@ export default function ManageSkillsPage() {
         variant: state.success ? 'default' : 'destructive',
       });
       if(state.success) {
-        getSkills().then(data => {
-            if (data) {
-                const formattedSkills = Object.entries(data).map(([category, skills], index) => ({
-                id: index,
-                category,
-                skills: skills.join(', '),
-                }));
-                setSkillCategories(formattedSkills);
-                setNextId(formattedSkills.length);
-            }
-        });
+        fetchAndSetSkills();
       }
     }
   }, [state, toast]);
