@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { NAV_LINKS, SOCIAL_LINKS } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import { useState } from 'react';
 
@@ -95,15 +95,18 @@ export function Sidebar() {
   return (
     <>
       {/* Mobile Floating Button & Sheet */}
-      <div className="md:hidden fixed bottom-4 right-4 z-50">
+      <div className="md:hidden fixed top-4 left-4 z-50">
         <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
           <SheetTrigger asChild>
-            <Button size="icon" variant="default" className="rounded-full shadow-lg h-14 w-14">
+            <Button size="icon" variant="outline" className="rounded-full shadow-lg h-12 w-12 bg-background/80 backdrop-blur-sm">
               <Menu className="h-6 w-6" />
               <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="flex flex-col bg-sidebar text-sidebar-foreground w-3/4 p-0">
+             <SheetHeader>
+                <SheetTitle className="sr-only">Main Menu</SheetTitle>
+            </SheetHeader>
             <SidebarContent />
           </SheetContent>
         </Sheet>
