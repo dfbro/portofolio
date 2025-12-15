@@ -7,7 +7,7 @@ import { NAV_LINKS, SOCIAL_LINKS } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Code2 } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { useState } from 'react';
 
 export function Sidebar() {
@@ -97,11 +97,7 @@ export function Sidebar() {
   return (
     <>
       {/* Mobile Header and Sheet */}
-      <header className="sticky top-0 z-40 flex h-14 items-center justify-between gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6 md:hidden">
-         <Link href="/" className="flex items-center space-x-2">
-            <Code2 className="h-6 w-6 text-primary" />
-            <span className="font-bold">Binary Canvas</span>
-          </Link>
+      <header className="sticky top-0 z-40 flex h-14 items-center justify-end gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6 md:hidden">
         <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
           <SheetTrigger asChild>
             <Button size="icon" variant="outline" className="md:hidden">
