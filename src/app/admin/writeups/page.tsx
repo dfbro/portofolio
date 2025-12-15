@@ -135,14 +135,21 @@ export default function ManageWriteupsPage() {
                     <Input value={item.rank} onChange={(e) => handleChange(item.id, 'rank', e.target.value)} placeholder="e.g., Top 5% or 1st Place" />
                     <Label>Date</Label>
                     <Input value={item.date} onChange={(e) => handleChange(item.id, 'date', e.target.value)} placeholder="e.g., Oct 2023" />
-                    <Label>Write-Up URL</Label>
-                    <Input 
+                    
+                    <Label htmlFor={`writeupUrl-${item.id}`}>Write-Up URL</Label>
+                    <Input
+                      id={`writeupUrl-${item.id}`}
+                      className="peer"
                       type="url"
                       required
                       value={item.writeupUrl} 
                       onChange={(e) => handleChange(item.id, 'writeupUrl', e.target.value)} 
                       placeholder="https://example.com/writeup" 
                     />
+                    <p className="text-sm text-muted-foreground invisible peer-invalid:visible">
+                      Please enter a valid URL (e.g., https://example.com).
+                    </p>
+
                     <Label>Image URL (optional)</Label>
                     <Input value={item.imageUrl} onChange={(e) => handleChange(item.id, 'imageUrl', e.target.value)} placeholder="https://images.unsplash.com/photo-1.jpg" />
                   </div>
