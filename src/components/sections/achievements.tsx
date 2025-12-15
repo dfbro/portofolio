@@ -7,9 +7,9 @@ import { Section } from './section-wrapper';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import Link from 'next/link';
-import { ArrowRight, Loader2 } from 'lucide-react';
-import { PlaceHolderImages } from '@/lib/data';
+import { ArrowRight, Trophy } from 'lucide-react';
 import { Skeleton } from '../ui/skeleton';
+import { ICONS } from '@/lib/data';
 
 const PREVIEW_COUNT = 3;
 
@@ -19,8 +19,8 @@ type Achievement = {
   description: string;
   organization: string;
   date: string;
-  url?: string;
-  imageId: string;
+  url: string;
+  imageUrl?: string;
 };
 
 export function Achievements({ showAll = false }: { showAll?: boolean }) {
@@ -51,8 +51,6 @@ export function Achievements({ showAll = false }: { showAll?: boolean }) {
 
   const achievementsToShow = showAll ? achievements : achievements.slice(0, PREVIEW_COUNT);
   const totalAchievements = achievements.length;
-
-  const findImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
   if (loading) {
     return (
@@ -95,40 +93,43 @@ export function Achievements({ showAll = false }: { showAll?: boolean }) {
     <Section id="achievements" title="Achievements">
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {achievementsToShow.map((achievement) => {
-          const image = findImage(achievement.imageId);
           return (
             <Card key={achievement.id} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2">
-              <CardHeader>
-                {image && (
-                  <div className="aspect-video overflow-hidden rounded-t-lg border-b">
-                    <Image
-                      src={image.imageUrl}
-                      alt={achievement.title}
-                      width={600}
-                      height={400}
-                      className="h-full w-full object-cover"
-                      data-ai-hint={image.imageHint}
-                    />
-                  </div>
+              <CardHeader className="p-0">
+                {achievement.imageUrl ? (
+                    <div className="aspect-video overflow-hidden rounded-t-lg border-b">
+                        <Image
+                        src={achievement.imageUrl}
+                        alt={achievement.title}
+                        width={600}
+                        height={400}
+                        className="h-full w-full object-cover"
+                        data-ai-hint="achievement image"
+                        />
+                    </div>
+                ) : (
+                    <div className="aspect-video overflow-hidden rounded-t-lg border-b bg-muted flex items-center justify-center">
+                        <Trophy className="h-16 w-16 text-muted-foreground" />
+                    </div>
                 )}
-                <CardTitle className="pt-4">{achievement.title}</CardTitle>
+                <div className="p-6 pb-0">
+                  <CardTitle>{achievement.title}</CardTitle>
+                </div>
               </CardHeader>
-              <CardContent className="flex-grow">
+              <CardContent className="flex-grow p-6">
                 <p className="text-muted-foreground">{achievement.description}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   <Badge variant="secondary">{achievement.organization}</Badge>
                   <Badge variant="secondary">{achievement.date}</Badge>
                 </div>
               </CardContent>
-              {achievement.url && (
-                <CardFooter className="flex justify-end">
+              <CardFooter className="flex justify-end p-6 pt-0">
                   <Button asChild variant="outline" size="sm">
                     <Link href={achievement.url} target="_blank">
                       Download Certificate
                     </Link>
                   </Button>
                 </CardFooter>
-              )}
             </Card>
           );
         })}

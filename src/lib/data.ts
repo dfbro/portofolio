@@ -6,6 +6,7 @@ import {
   Twitter,
   FileText,
   Globe,
+  Trophy
 } from 'lucide-react';
 import placeholderData from './placeholder-images.json';
 
@@ -69,4 +70,5 @@ export const ICONS = {
     fileText: FileText,
     globe: Globe,
     code: Code,
+    trophy: Trophy
 };

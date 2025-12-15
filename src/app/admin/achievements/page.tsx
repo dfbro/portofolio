@@ -28,7 +28,7 @@ type Achievement = {
   organization: string;
   date: string;
   url: string;
-  imageId: string;
+  imageUrl: string;
 };
 
 export default function ManageAchievementsPage() {
@@ -46,7 +46,11 @@ export default function ManageAchievementsPage() {
         setLoading(true);
         const response = await fetch('/api/achievements');
         const data = await response.json();
-        setAchievements(data);
+        const formattedData = data.map((item: any) => ({
+            ...item,
+            imageUrl: item.imageUrl ?? ''
+        }))
+        setAchievements(formattedData);
     } catch (error) {
         console.error("Failed to fetch achievements", error);
         toast({
@@ -78,7 +82,7 @@ export default function ManageAchievementsPage() {
 
   const handleAdd = () => {
     const newId = `achieve_${Date.now()}`;
-    setAchievements([...achievements, { id: newId, title: '', description: '', organization: '', date: '', url: '', imageId: '' }]);
+    setAchievements([...achievements, { id: newId, title: '', description: '', organization: '', date: '', url: '', imageUrl: '' }]);
   };
 
   const handleRemove = (id: string) => {
@@ -133,10 +137,10 @@ export default function ManageAchievementsPage() {
                     <Input value={item.organization} onChange={(e) => handleChange(item.id, 'organization', e.target.value)} placeholder="e.g., Google" />
                     <Label>Date</Label>
                     <Input value={item.date} onChange={(e) => handleChange(item.id, 'date', e.target.value)} placeholder="e.g., 2023" />
-                    <Label>Certificate URL (optional)</Label>
+                    <Label>Certificate URL</Label>
                     <Input value={item.url} onChange={(e) => handleChange(item.id, 'url', e.target.value)} placeholder="https://example.com/certificate.pdf" />
-                    <Label>Image ID (from placeholder-images.json)</Label>
-                    <Input value={item.imageId} onChange={(e) => handleChange(item.id, 'imageId', e.target.value)} placeholder="e.g., achievement-1" />
+                    <Label>Image URL (optional)</Label>
+                    <Input value={item.imageUrl} onChange={(e) => handleChange(item.id, 'imageUrl', e.target.value)} placeholder="https://images.unsplash.com/photo-1.jpg" />
                   </div>
                 </div>
               ))}

@@ -11,8 +11,8 @@ const achievementSchema = z.object({
   description: z.string().min(1, 'Description is required'),
   organization: z.string().min(1, 'Organization is required'),
   date: z.string().min(1, 'Date is required'),
-  url: z.string().url('Invalid URL format').or(z.literal('')).or(z.literal('#')),
-  imageId: z.string().min(1, 'Image ID is required'),
+  url: z.string().url('Invalid URL format'),
+  imageUrl: z.string().url('Invalid URL format').or(z.literal('')),
 });
 
 const achievementsFileSchema = z.object({
