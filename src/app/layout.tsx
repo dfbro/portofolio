@@ -13,7 +13,17 @@ const appUrl = `${protocol}://${appHostname}`;
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl),
   title: 'Portfolio',
-  description: 'Portfolio of a Web Developer and CTF Player',
+  description: 'Portfolio of '+process.env.NEXT_PUBLIC_PORTFOLIO_NAME,
+  icons: {
+    icon: '/favicon.ico',
+  },
+  keywords: ["portofolio", "portfolio", ""+process.env.NEXT_PUBLIC_PORTFOLIO_NAME],
+  authors: [
+    {
+      name: ''+process.env.NEXT_PUBLIC_PORTFOLIO_NAME,
+      url: ''+process.env.NEXT_PUBLIC_EMAIL,
+    },
+  ],
 };
 
 export default function RootLayout({
