@@ -1,18 +1,18 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CTF_ACHIEVEMENTS, ICONS } from '@/lib/data';
+import { CTF_WRITEUPS, ICONS } from '@/lib/data';
 import { Section } from './section-wrapper';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 
 export function Ctf({ showAll = false }: { showAll?: boolean }) {
-  const achievementsToShow = showAll ? CTF_ACHIEVEMENTS : CTF_ACHIEVEMENTS.slice(0, 2);
+  const writeupsToShow = showAll ? CTF_WRITEUPS : CTF_WRITEUPS.slice(0, 2);
 
   return (
-    <Section id="ctf" title="CTF Achievements">
+    <Section id="ctf" title="CTF WriteUps">
       <div className="grid gap-8 md:grid-cols-2">
-        {achievementsToShow.map((ctf) => (
+        {writeupsToShow.map((ctf) => (
           <Card key={ctf.event} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2">
             <CardHeader>
              {ctf.image && (
@@ -45,11 +45,11 @@ export function Ctf({ showAll = false }: { showAll?: boolean }) {
           </Card>
         ))}
       </div>
-      {!showAll && CTF_ACHIEVEMENTS.length > 2 && (
+      {!showAll && CTF_WRITEUPS.length > 2 && (
         <div className="mt-12 flex justify-center">
           <Button asChild>
             <Link href="/ctf">
-              View All Achievements
+              View All Write-ups
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>

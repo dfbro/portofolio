@@ -21,7 +21,7 @@
     {
       "id": "ctf-1",
       "description": "Green binary code on a black screen",
-      "imageUrl": "https://images.unsplash.com/photo-1569605803663-e9337d901ff9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxiaW5hcnklMjBjb2RlfGVufDB8fHx8MTc2NTc3MTYwOHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1569605803663-e9337d901ff9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxiaW5hcnklMjBjb2RlfGVufDB8fHx8fDE3NjU3NzE2MDh8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "binary code"
     },
     {
@@ -29,6 +29,24 @@
       "description": "A computer network diagram",
       "imageUrl": "https://images.unsplash.com/photo-1707718282117-8f5ebb5b8843?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxuZXR3b3JrJTIwZGlhZ3JhbXxlbnwwfHx8fDE3NjU3NzczNDh8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "network diagram"
+    },
+    {
+      "id": "achievement-1",
+      "description": "Google Cloud logo on a server rack background",
+      "imageUrl": "https://images.unsplash.com/photo-1598257006624-612693300589?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnb29nbGUlMjBjbG91ZHxlbnwwfHx8fDE3NjU4NTMwODF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "google cloud"
+    },
+    {
+      "id": "achievement-2",
+      "description": "Kubernetes logo with abstract network lines",
+      "imageUrl": "https://images.unsplash.com/photo-1634017837439-4786d0d46338?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxrdWJlcm5ldGVzfGVufDB8fHx8fDE3NjU4NTMyMTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "kubernetes logo"
+    },
+    {
+      "id": "achievement-3",
+      "description": "AWS logo on a blue and purple background",
+      "imageUrl": "https://images.unsplash.com/photo-1605995543335-a7759904d9d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhd3N8ZW58MHx8fHwxNzY1ODUzMjQwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "aws logo"
     }
   ]
 }

@@ -15,7 +15,8 @@ export const NAV_LINKS = [
   { name: 'Home', href: '/#home' },
   { name: 'Projects', href: '/projects' },
   { name: 'Skills', href: '/#skills' },
-  { name: 'CTF', href: '/ctf' },
+  { name: 'Achievements', href: '/#achievements' },
+  { name: 'WriteUps', href: '/ctf' },
   { name: 'Contact', href: '/#contact' },
 ];
 
@@ -54,7 +55,7 @@ export const PROJECTS = [
     techStack: ['React', 'Vite', 'Recharts', 'Zustand', 'Firebase'],
     liveUrl: '#',
     repoUrl: '#',
-    image: findImage('project-2'),
+image: findImage('project-2'),
   },
   {
     title: 'Portfolio API',
@@ -64,17 +65,36 @@ export const PROJECTS = [
     repoUrl: '#',
     image: findImage('project-3'),
   },
+];
+
+export const ACHIEVEMENTS = [
   {
-    title: 'Another Project',
-    description: 'This is another great project to showcase.',
-    techStack: ['SvelteKit', 'Tailwind CSS', 'PocketBase'],
-    liveUrl: '#',
-    repoUrl: '#',
-    image: findImage('project-2'),
+    title: 'Google Cloud Certified',
+    description: 'Associate Cloud Engineer',
+    organization: 'Google',
+    date: '2023',
+    url: '#',
+    image: findImage('achievement-1'),
+  },
+  {
+    title: 'Certified Kubernetes Administrator',
+    description: 'CKA Certification',
+    organization: 'The Linux Foundation',
+    date: '2022',
+    url: '#',
+    image: findImage('achievement-2'),
+  },
+  {
+    title: 'AWS Certified Solutions Architect',
+    description: 'Associate',
+    organization: 'Amazon Web Services',
+    date: '2021',
+    url: '#',
+    image: findImage('achievement-3'),
   },
 ];
 
-export const CTF_ACHIEVEMENTS = [
+export const CTF_WRITEUPS = [
     {
         event: "HackTheBox University CTF 2023",
         rank: "Top 5%",
