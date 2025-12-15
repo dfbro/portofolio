@@ -1,12 +1,13 @@
 import type {NextConfig} from 'next';
 
 const appHostname = process.env.APP_HOSTNAME || 'localhost:9002';
+const publicHostname = 'mikir.lylo.eu.org';
 
 const nextConfig: NextConfig = {
   /* config options here */
   experimental: {
     serverActions: {
-      allowedOrigins: [appHostname],
+      allowedOrigins: ["localhost", "127.0.0.1:9002", appHostname, publicHostname],
     },
   },
   typescript: {
@@ -19,8 +20,12 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '*',
+        hostname: '**',
       },
+      {
+        protocol: 'http',
+        hostname: '**',
+      }
     ],
   },
 };
