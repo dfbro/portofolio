@@ -65,6 +65,14 @@ export const PROJECTS = [
     repoUrl: '#',
     image: findImage('project-3'),
   },
+  {
+    title: 'Another Project',
+    description: 'This is another great project to showcase.',
+    techStack: ['SvelteKit', 'Tailwind CSS', 'PocketBase'],
+    liveUrl: '#',
+    repoUrl: '#',
+    image: findImage('project-2'),
+  },
 ];
 
 export const CTF_ACHIEVEMENTS = [
