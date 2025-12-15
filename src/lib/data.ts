@@ -1,3 +1,4 @@
+
 import {
   Code,
   Github,
@@ -37,30 +38,6 @@ export const SOCIAL_LINKS: { name: string; url: string; icon: LucideIcon }[] = [
     url: process.env.NEXT_PUBLIC_TWITTER_URL || 'https://twitter.com',
     icon: Twitter,
   },
-];
-
-export const CTF_WRITEUPS = [
-    {
-        event: "HackTheBox University CTF 2023",
-        rank: "Top 5%",
-        date: "Oct 2023",
-        writeupUrl: "#",
-        image: PlaceHolderImages.find(img => img.id === 'ctf-1'),
-    },
-    {
-        event: "DEF CON CTF Quals",
-        rank: "Participant",
-        date: "May 2023",
-        writeupUrl: "#",
-        image: PlaceHolderImages.find(img => img.id === 'ctf-2'),
-    },
-    {
-        event: "Another CTF",
-        rank: "1st Place",
-        date: "Jan 2023",
-        writeupUrl: "#",
-        image: PlaceHolderImages.find(img => img.id === 'ctf-1'),
-    }
 ];
 
 export const ICONS = {

@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { logout } from '@/app/admin/actions';
@@ -22,7 +23,7 @@ export default function AdminDashboardPage() {
             <Link href="/admin/achievements">Manage Achievements</Link>
           </Button>
           <Button asChild variant="outline" className="w-full justify-start">
-            <Link href="#">Manage WriteUps</Link>
+            <Link href="/admin/writeups">Manage WriteUps</Link>
           </Button>
           <form action={logout}>
             <Button type="submit" variant="destructive" className="w-full mt-4">
