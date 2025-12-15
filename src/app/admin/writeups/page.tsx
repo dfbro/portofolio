@@ -136,7 +136,13 @@ export default function ManageWriteupsPage() {
                     <Label>Date</Label>
                     <Input value={item.date} onChange={(e) => handleChange(item.id, 'date', e.target.value)} placeholder="e.g., Oct 2023" />
                     <Label>Write-Up URL</Label>
-                    <Input value={item.writeupUrl} onChange={(e) => handleChange(item.id, 'writeupUrl', e.target.value)} placeholder="https://example.com/writeup" />
+                    <Input 
+                      type="url"
+                      required
+                      value={item.writeupUrl} 
+                      onChange={(e) => handleChange(item.id, 'writeupUrl', e.target.value)} 
+                      placeholder="https://example.com/writeup" 
+                    />
                     <Label>Image URL (optional)</Label>
                     <Input value={item.imageUrl} onChange={(e) => handleChange(item.id, 'imageUrl', e.target.value)} placeholder="https://images.unsplash.com/photo-1.jpg" />
                   </div>
