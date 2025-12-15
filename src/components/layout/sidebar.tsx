@@ -30,8 +30,6 @@ export function Sidebar() {
     }
     
     // For other pages, check if the pathname starts with the href
-    // This handles nested routes correctly.
-    // We also make sure the href is not just a homepage section link
     if (!href.startsWith('/#')) {
         return cn(
             'flex items-center gap-3 rounded-lg px-3 py-2 text-sidebar-foreground transition-all hover:text-sidebar-primary-foreground hover:bg-sidebar-accent',
@@ -96,12 +94,12 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Mobile Header and Sheet */}
-      <header className="sticky top-0 z-40 flex h-14 items-center justify-end gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6 md:hidden">
+      {/* Mobile Floating Button & Sheet */}
+      <div className="md:hidden fixed bottom-4 right-4 z-50">
         <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
           <SheetTrigger asChild>
-            <Button size="icon" variant="outline" className="md:hidden">
-              <Menu className="h-5 w-5" />
+            <Button size="icon" variant="default" className="rounded-full shadow-lg h-14 w-14">
+              <Menu className="h-6 w-6" />
               <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
@@ -109,10 +107,10 @@ export function Sidebar() {
             <SidebarContent />
           </SheetContent>
         </Sheet>
-      </header>
+      </div>
 
       {/* Desktop Sidebar */}
-      <aside className="fixed inset-y-0 left-0 z-50 hidden w-64 flex-col border-r bg-sidebar md:flex">
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r bg-sidebar md:flex">
         <SidebarContent />
       </aside>
     </>
