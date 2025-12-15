@@ -25,15 +25,19 @@ export async function updateSkills(
   formData: FormData
 ): Promise<{ message: string; success: boolean }> {
   try {
-    const categories = JSON.parse(formData.get('categories') as string);
+    const data = JSON.parse(formData.get('skillsData') as string);
+    
     const updatedSkills: Record<string, string[]> = {};
 
-    for (const category of categories) {
-      const skillsString = formData.get(category) as string;
-      updatedSkills[category] = skillsString.split(',').map(s => s.trim()).filter(Boolean);
+    for (const item of data) {
+       if (item.category && item.skills) {
+         updatedSkills[item.category] = item.skills.split(',').map((s: string) => s.trim()).filter(Boolean);
+       }
     }
     
-    const validation = skillsSchema.safeParse(updatedSkills);
+    // Allow empty object for skills
+    const validation = z.record(z.string(), z.array(z.string())).safeParse(updatedSkills);
+
     if (!validation.success) {
       return { message: `Invalid data format: ${validation.error.message}`, success: false };
     }
