@@ -1,3 +1,46 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "project-1",
+      "description": "Abstract code lines on a dark background",
+      "imageUrl": "https://images.unsplash.com/photo-1760548425298-22aa4b60fc16?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMGNvZGV8ZW58MHx8fHwxNzY1NzgyNzY5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract code"
+    },
+    {
+      "id": "project-2",
+      "description": "A modern web application dashboard",
+      "imageUrl": "https://images.unsplash.com/photo-1583932692875-a42450d50acf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx3ZWIlMjBkYXNoYm9hcmR8ZW58MHx8fHwxNzY1Nzg4NjAzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "web dashboard"
+    },
+    {
+      "id": "project-3",
+      "description": "E-commerce website on a laptop screen",
+      "imageUrl": "https://images.unsplash.com/photo-1688561807381-05137151978f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxlY29tbWVyY2UlMjBsYXB0b3B8ZW58MHx8fHwxNzY1Nzg4NjAzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ecommerce laptop"
+    },
+    {
+      "id": "ctf-1",
+      "description": "Green binary code on a black screen",
+      "imageUrl": "https://images.unsplash.com/photo-1569605803663-e9337d901ff9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxiaW5hcnklMjBjb2RlfGVufDB8fHx8MTc2NTc3MTYwOHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "binary code"
+    },
+    {
+      "id": "ctf-2",
+      "description": "A computer network diagram",
+      "imageUrl": "https://images.unsplash.com/photo-1707718282117-8f5ebb5b8843?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxuZXR3b3JrJTIwZGlhZ3JhbXxlbnwwfHx8fDE3NjU3NzczNDh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "network diagram"
+    },
+    {
+      "id": "blog-1",
+      "description": "A person typing on a keyboard in a dark room",
+      "imageUrl": "https://images.unsplash.com/photo-1646839083586-cf7747c1e9bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx0eXBpbmclMjBrZXlib2FyZHxlbnwwfHx8fDE3NjU3NTI5MjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "typing keyboard"
+    },
+    {
+      "id": "blog-2",
+      "description": "A magnifying glass over a computer screen with code",
+      "imageUrl": "https://images.unsplash.com/photo-1531497684310-0f15276c39ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y29kZSUyMHJldmlld3xlbnwwfHx8fDE3NjU3ODg2MDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "code review"
+    }
+  ]
 }
