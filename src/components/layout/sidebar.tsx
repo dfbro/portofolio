@@ -19,15 +19,32 @@ export function Sidebar() {
   const [isSheetOpen, setSheetOpen] = useState(false);
 
   const getLinkClass = (href: string) => {
-    const isHomePage = pathname === '/';
-    const isCurrentPage = isHomePage ? href === '/' : pathname === href;
-
-    return cn(
-      'flex items-center gap-3 rounded-lg px-3 py-2 text-sidebar-foreground transition-all hover:text-sidebar-primary-foreground hover:bg-sidebar-accent',
-      {
-        'bg-sidebar-accent text-sidebar-primary-foreground': isCurrentPage,
-      }
-    );
+    // Check if it's a section link on the homepage
+    const isHomepageSectionLink = href.startsWith('/#');
+    
+    // For the homepage, the link is active only if the path is exactly "/"
+    if (href === '/') {
+        return cn(
+            'flex items-center gap-3 rounded-lg px-3 py-2 text-sidebar-foreground transition-all hover:text-sidebar-primary-foreground hover:bg-sidebar-accent',
+            {
+                'bg-sidebar-accent text-sidebar-primary-foreground': pathname === '/',
+            }
+        );
+    }
+    
+    // For other pages, check if the pathname starts with the href
+    // but ignore homepage section links
+    if (!isHomepageSectionLink) {
+        return cn(
+            'flex items-center gap-3 rounded-lg px-3 py-2 text-sidebar-foreground transition-all hover:text-sidebar-primary-foreground hover:bg-sidebar-accent',
+            {
+                'bg-sidebar-accent text-sidebar-primary-foreground': pathname.startsWith(href),
+            }
+        );
+    }
+    
+    // Default class for homepage section links when not on the homepage
+    return 'flex items-center gap-3 rounded-lg px-3 py-2 text-sidebar-foreground transition-all hover:text-sidebar-primary-foreground hover:bg-sidebar-accent';
   };
 
   const SidebarContent = () => (
