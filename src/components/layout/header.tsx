@@ -15,7 +15,10 @@ export function Header() {
 
   const getLinkClass = (href: string) => {
     const isHomePage = pathname === '/';
-    const isCurrentPage = isHomePage ? href.startsWith('/#') || href === '/' : pathname === href;
+    const isCurrentPage = isHomePage
+      ? href === '/#home' || href === '/'
+      : pathname === href || pathname.startsWith(`${href}/`);
+
     const isSectionLink = href.startsWith('/#');
 
     // For subpages, ensure home page links are absolute.
@@ -25,7 +28,7 @@ export function Header() {
       href: finalHref,
       className: cn(
         'text-sm font-medium transition-colors hover:text-primary',
-        isCurrentPage || (pathname.startsWith(href) && href !== '/') ? 'text-primary' : 'text-muted-foreground'
+        isCurrentPage ? 'text-primary' : 'text-muted-foreground'
       ),
     };
   };
