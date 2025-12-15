@@ -1,14 +1,16 @@
 'use client';
 
 import { useState, useEffect, useTransition } from 'react';
+import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Section } from './section-wrapper';
 import { SKILLS } from '@/lib/data';
 import { aiHighlightSkills } from '@/ai/flows/highlight-skills';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
-export function Skills() {
+export function Skills({ showMoreButton = false }: { showMoreButton?: boolean }) {
   const [viewedSkills, setViewedSkills] = useState<string[]>([]);
   const [highlightedSkills, setHighlightedSkills] = useState<string[]>([]);
   const [isPending, startTransition] = useTransition();
@@ -56,6 +58,16 @@ export function Skills() {
           </Card>
         ))}
       </div>
+      {showMoreButton && (
+        <div className="mt-12 flex justify-center">
+          <Button asChild>
+            <Link href="/skills">
+              See Full Skillset
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+        </div>
+      )}
     </Section>
   );
 }

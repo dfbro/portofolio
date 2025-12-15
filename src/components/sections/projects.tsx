@@ -5,12 +5,14 @@ import { Button } from '@/components/ui/button';
 import { PROJECTS, ICONS } from '@/lib/data';
 import { Section } from './section-wrapper';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
-export function Projects() {
+export function Projects({ showAll = false }: { showAll?: boolean }) {
+  const projectsToShow = showAll ? PROJECTS : PROJECTS.slice(0, 3);
   return (
     <Section id="projects" title="Web Development Projects">
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {PROJECTS.map((project) => (
+        {projectsToShow.map((project) => (
           <Card key={project.title} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2">
             <CardHeader>
               {project.image && (
@@ -50,6 +52,16 @@ export function Projects() {
           </Card>
         ))}
       </div>
+      {!showAll && PROJECTS.length > 3 && (
+        <div className="mt-12 flex justify-center">
+          <Button asChild>
+            <Link href="/projects">
+              View All Projects
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+        </div>
+      )}
     </Section>
   );
 }
