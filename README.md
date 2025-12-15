@@ -38,7 +38,7 @@ Install the project dependencies using `npm`:
 npm install
 ```
 
-### 3. Set Up Environment Variables
+### 3. Set Up Environment Variables (Required)
 
 The project uses environment variables to store sensitive information and configuration details.
 
