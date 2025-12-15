@@ -44,12 +44,14 @@ export function Projects({ showAll = false }: { showAll?: boolean }) {
             <Card key={i} className="flex flex-col">
               <CardHeader>
                 <Skeleton className="h-[215px] w-full rounded-t-lg" />
-                <Skeleton className="h-8 w-3/4 pt-4" />
+                <CardTitle className='pt-4'>
+                  <Skeleton className="h-8 w-3/4" />
+                </CardTitle>
               </CardHeader>
               <CardContent className="flex-grow space-y-2">
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-5/6" />
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="mt-4 flex flex-wrap gap-2 pt-2">
                   <Skeleton className="h-6 w-20 rounded-full" />
                   <Skeleton className="h-6 w-24 rounded-full" />
                   <Skeleton className="h-6 w-16 rounded-full" />
@@ -72,7 +74,7 @@ export function Projects({ showAll = false }: { showAll?: boolean }) {
         {projectsToShow.map((project) => (
           <Card key={project.id} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2">
             <CardHeader>
-              {project.imageUrl && (
+              {project.imageUrl ? (
                 <div className="aspect-video overflow-hidden rounded-t-lg border-b">
                   <Image
                     src={project.imageUrl}
@@ -82,6 +84,10 @@ export function Projects({ showAll = false }: { showAll?: boolean }) {
                     className="h-full w-full object-cover"
                     data-ai-hint="project image"
                   />
+                </div>
+              ) : (
+                <div className="aspect-video overflow-hidden rounded-t-lg border-b bg-muted flex items-center justify-center">
+                  <ICONS.code className="h-16 w-16 text-muted-foreground" />
                 </div>
               )}
               <CardTitle className="pt-4">{project.title}</CardTitle>
