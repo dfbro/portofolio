@@ -1,0 +1,4 @@
+{
+  "Web Development": ["React", "Next.js", "TypeScript", "Node.js", "GraphQL", "PostgreSQL", "Docker", "Tailwind CSS"],
+  "Cybersecurity": ["Reverse Engineering", "Web Exploitation", "Forensics", "Cryptography", "Wireshark", "Metasploit", "Burp Suite", "Ghidra"]
+}

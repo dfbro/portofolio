@@ -13,7 +13,7 @@ export default function AdminDashboardPage() {
         </CardHeader>
         <CardContent className="grid gap-4">
           <Button asChild variant="outline" className="w-full justify-start">
-            <Link href="#">Manage Skills</Link>
+            <Link href="/admin/skills">Manage Skills</Link>
           </Button>
           <Button asChild variant="outline" className="w-full justify-start">
             <Link href="#">Manage Projects</Link>

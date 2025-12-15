@@ -7,9 +7,10 @@ import {
   FileText,
   Globe,
 } from 'lucide-react';
-import data from './placeholder-images.json';
+import placeholderData from './placeholder-images.json';
+import skillsData from '@/data/skills.json';
 
-const PlaceHolderImages = data.placeholderImages;
+const PlaceHolderImages = placeholderData.placeholderImages;
 
 export const NAV_LINKS = [
   { name: 'Home', href: '/' },
@@ -134,10 +135,7 @@ export const CTF_WRITEUPS = [
     }
 ];
 
-export const SKILLS: Record<string, string[]> = {
-    'Web Development': ['React', 'Next.js', 'TypeScript', 'Node.js', 'GraphQL', 'PostgreSQL', 'Docker', 'Tailwind CSS'],
-    'Cybersecurity': ['Reverse Engineering', 'Web Exploitation', 'Forensics', 'Cryptography', 'Wireshark', 'Metasploit', 'Burp Suite', 'Ghidra']
-};
+export const SKILLS: Record<string, string[]> = skillsData;
 
 export const ICONS = {
     github: Github,
