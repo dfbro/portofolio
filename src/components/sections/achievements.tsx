@@ -5,12 +5,15 @@ import { Section } from './section-wrapper';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
-export function Achievements() {
+export function Achievements({ showAll = false }: { showAll?: boolean }) {
+  const achievementsToShow = showAll ? ACHIEVEMENTS : ACHIEVEMENTS.slice(0, 3);
+
   return (
     <Section id="achievements" title="Achievements">
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {ACHIEVEMENTS.map((achievement) => (
+        {achievementsToShow.map((achievement) => (
           <Card key={achievement.title} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2">
             <CardHeader>
               {achievement.image && (
@@ -46,6 +49,16 @@ export function Achievements() {
           </Card>
         ))}
       </div>
+      {!showAll && ACHIEVEMENTS.length > 3 && (
+        <div className="mt-12 flex justify-center">
+          <Button asChild>
+            <Link href="/achievements">
+              View All Achievements
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+        </div>
+      )}
     </Section>
   );
 }

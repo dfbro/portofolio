@@ -15,7 +15,7 @@ export const NAV_LINKS = [
   { name: 'Home', href: '/#home' },
   { name: 'Projects', href: '/projects' },
   { name: 'Skills', href: '/#skills' },
-  { name: 'Achievements', href: '/#achievements' },
+  { name: 'Achievements', href: '/achievements' },
   { name: 'WriteUps', href: '/ctf' },
   { name: 'Contact', href: '/#contact' },
 ];
@@ -64,6 +64,14 @@ image: findImage('project-2'),
     liveUrl: '#',
     repoUrl: '#',
     image: findImage('project-3'),
+  },
+    {
+    title: 'Another Project',
+    description: 'A description for another project.',
+    techStack: ['Tech 1', 'Tech 2', 'Tech 3'],
+    liveUrl: '#',
+    repoUrl: '#',
+    image: findImage('project-1'),
   },
 ];
 
