@@ -1,4 +1,3 @@
-
 {
   "writeups": [
     {
@@ -6,7 +5,7 @@
       "event": "HackTheBox University CTF 2023",
       "rank": "Top 5%",
       "date": "Oct 2023",
-      "writeupUrl": "#",
+      "writeupUrl": "https://example.com",
       "imageUrl": "https://images.unsplash.com/photo-1569605803663-e9337d901ff9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxiaW5hcnklMjBjb2RlfGVufDB8fHx8fDE3NjU3NzE2MDh8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
@@ -14,7 +13,7 @@
       "event": "DEF CON CTF Quals",
       "rank": "Participant",
       "date": "May 2023",
-      "writeupUrl": "#",
+      "writeupUrl": "https://example.com",
       "imageUrl": "https://images.unsplash.com/photo-1707718282117-8f5ebb5b8843?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxuZXR3b3JrJTIwZGlhZ3JhbXxlbnwwfHx8fDE3NjU3NzczNDh8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
@@ -22,8 +21,16 @@
       "event": "Another CTF",
       "rank": "1st Place",
       "date": "Jan 2023",
-      "writeupUrl": "#",
+      "writeupUrl": "https://example.com",
       "imageUrl": "https://images.unsplash.com/photo-1569605803663-e9337d901ff9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxiaW5hcnklMjBjb2RlfGVufDB8fHx8fDE3NjU3NzE2MDh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    },
+    {
+      "id": "writeup_1765799117263",
+      "event": "PicoCTF",
+      "rank": "nobody",
+      "date": "Dec 2025",
+      "writeupUrl": "https://example.com",
+      "imageUrl": "https://repository-images.githubusercontent.com/669727284/7d12506c-4588-469b-94fb-ecec21bc4d9c"
     }
   ]
 }

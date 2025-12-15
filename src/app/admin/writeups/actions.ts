@@ -11,7 +11,7 @@ const writeupSchema = z.object({
   event: z.string().min(1, 'Event name is required'),
   rank: z.string().min(1, 'Rank is required'),
   date: z.string().min(1, 'Date is required'),
-  writeupUrl: z.string().url('Invalid URL format').or(z.literal('')),
+  writeupUrl: z.string().url('A valid URL for the write-up is required'),
   imageUrl: z.string().url('Invalid URL format').or(z.literal('')),
 });
 
