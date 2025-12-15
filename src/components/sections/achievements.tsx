@@ -120,7 +120,7 @@ export function Achievements({ showAll = false }: { showAll?: boolean }) {
                   <Badge variant="secondary">{achievement.date}</Badge>
                 </div>
               </CardContent>
-              {achievement.url && achievement.url !== '#' && (
+              {achievement.url && (
                 <CardFooter className="flex justify-end">
                   <Button asChild variant="outline" size="sm">
                     <Link href={achievement.url} target="_blank">
