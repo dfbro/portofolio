@@ -4,16 +4,25 @@ import { useState, useEffect, useTransition } from 'react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Section } from './section-wrapper';
-import { SKILLS } from '@/lib/data';
 import { aiHighlightSkills } from '@/ai/flows/highlight-skills';
 import { Loader2, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { getSkills } from '@/app/admin/skills/actions';
 
 export function Skills({ showMoreButton = false }: { showMoreButton?: boolean }) {
+  const [skillsData, setSkillsData] = useState<Record<string, string[]>>({});
   const [viewedSkills, setViewedSkills] = useState<string[]>([]);
   const [highlightedSkills, setHighlightedSkills] = useState<string[]>([]);
   const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    getSkills().then(data => {
+        if (data) {
+            setSkillsData(data);
+        }
+    });
+  }, []);
 
   useEffect(() => {
     if (viewedSkills.length > 0) {
@@ -37,7 +46,7 @@ export function Skills({ showMoreButton = false }: { showMoreButton?: boolean })
         </p>
        </div>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        {Object.entries(SKILLS).map(([category, skills]) => (
+        {Object.entries(skillsData).map(([category, skills]) => (
           <Card key={category} className="transition-shadow hover:shadow-lg">
             <CardHeader>
               <CardTitle>{category}</CardTitle>

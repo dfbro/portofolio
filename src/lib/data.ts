@@ -8,7 +8,6 @@ import {
   Globe,
 } from 'lucide-react';
 import placeholderData from './placeholder-images.json';
-import skillsData from '@/data/skills.json';
 
 const PlaceHolderImages = placeholderData.placeholderImages;
 
@@ -56,7 +55,7 @@ export const PROJECTS = [
     techStack: ['React', 'Vite', 'Recharts', 'Zustand', 'Firebase'],
     liveUrl: '#',
     repoUrl: '#',
-    image: findImage('project-2'),
+image: findImage('project-2'),
   },
   {
     title: 'Portfolio API',
@@ -134,8 +133,6 @@ export const CTF_WRITEUPS = [
         image: findImage('ctf-1'),
     }
 ];
-
-export const SKILLS: Record<string, string[]> = skillsData;
 
 export const ICONS = {
     github: Github,
