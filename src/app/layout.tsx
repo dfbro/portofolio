@@ -12,7 +12,7 @@ const appUrl = `${protocol}://${appHostname}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl),
-  title: 'Binary Canvas',
+  title: 'Portfolio',
   description: 'Portfolio of a Web Developer and CTF Player',
 };
 
