@@ -14,8 +14,8 @@ export function Hero() {
             <Image 
                 src={profilePictureUrl}
                 alt={portfolioName}
-                width={128}
-                height={128}
+                width={256}
+                height={256}
                 className="rounded-full object-cover shadow-lg"
                 data-ai-hint="profile picture"
                 priority

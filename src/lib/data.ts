@@ -12,10 +12,10 @@ import data from './placeholder-images.json';
 const PlaceHolderImages = data.placeholderImages;
 
 export const NAV_LINKS = [
-  { name: 'Home', href: '/' },
+  { name: 'Home', href: '/#home' },
   { name: 'Projects', href: '/projects' },
   { name: 'Skills', href: '/skills' },
-  { name: 'CTF', href: '/#ctf' },
+  { name: 'CTF', href: '/ctf' },
   { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/#contact' },
 ];
@@ -90,6 +90,13 @@ export const CTF_ACHIEVEMENTS = [
         writeupUrl: "#",
         image: findImage('ctf-2'),
     },
+    {
+        event: "Another CTF",
+        rank: "1st Place",
+        date: "Jan 2023",
+        writeupUrl: "#",
+        image: findImage('ctf-1'),
+    }
 ];
 
 export const SKILLS: Record<string, string[]> = {
