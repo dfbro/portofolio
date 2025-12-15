@@ -16,7 +16,7 @@ export default function Home() {
         <Projects />
         <Skills showMoreButton={true} />
         <Ctf />
-        <Blog />
+        <Blog showMoreButton={true} />
         <Contact />
       </main>
       <Footer />

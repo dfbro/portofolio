@@ -13,10 +13,10 @@ const PlaceHolderImages = data.placeholderImages;
 
 export const NAV_LINKS = [
   { name: 'Home', href: '/' },
-  { name: 'Projects', href: '/#projects' },
-  { name: 'Skills', href: '/#skills' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Skills', href: '/skills' },
   { name: 'CTF', href: '/#ctf' },
-  { name: 'Blog', href: '/#blog' },
+  { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/#contact' },
 ];
 

@@ -4,12 +4,15 @@ import { Button } from '@/components/ui/button';
 import { BLOG_POSTS } from '@/lib/data';
 import { Section } from './section-wrapper';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
-export function Blog() {
+export function Blog({ showAll = false, showMoreButton = false }: { showAll?: boolean, showMoreButton?: boolean }) {
+  const postsToShow = showAll ? BLOG_POSTS : BLOG_POSTS.slice(0, 2);
+
   return (
     <Section id="blog" title="Blog & Articles">
       <div className="grid gap-8 md:grid-cols-2">
-        {BLOG_POSTS.map((post) => (
+        {postsToShow.map((post) => (
           <Card key={post.title} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2">
             <CardHeader>
               {post.image && (
@@ -39,6 +42,16 @@ export function Blog() {
           </Card>
         ))}
       </div>
+       {showMoreButton && !showAll && BLOG_POSTS.length > 2 && (
+        <div className="mt-12 flex justify-center">
+          <Button asChild>
+            <Link href="/blog">
+              View All Posts
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+        </div>
+      )}
     </Section>
   );
 }
