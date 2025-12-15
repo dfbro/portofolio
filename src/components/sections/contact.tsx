@@ -1,55 +1,33 @@
+
 'use client';
 
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { Mail, Send, Loader2 } from 'lucide-react';
-
+import { useState } from 'react';
+import { Mail, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Section } from './section-wrapper';
-import { useToast } from '@/hooks/use-toast';
-import { submitContactForm } from '@/app/actions';
-import { contactSchema } from '@/lib/schemas';
 import { SOCIAL_LINKS } from '@/lib/data';
-import { useTransition } from 'react';
-
-type ContactFormValues = z.infer<typeof contactSchema>;
 
 export function Contact() {
-  const { toast } = useToast();
-  const [isPending, startTransition] = useTransition();
   const email = process.env.NEXT_PUBLIC_EMAIL || 'alex.doe@email.com';
+  const portfolioName = process.env.NEXT_PUBLIC_PORTFOLIO_NAME || 'Alex Doe';
+  
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
+  const [mailOption, setMailOption] = useState('gmail');
 
-  const form = useForm<ContactFormValues>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-      message: '',
-    },
-  });
-
-  function onSubmit(data: ContactFormValues) {
-    startTransition(async () => {
-      const result = await submitContactForm(data);
-      if (result.success) {
-        toast({
-          title: 'Message Sent!',
-          description: result.message,
-        });
-        form.reset();
-      } else {
-        toast({
-          title: 'Error',
-          description: result.message || 'Something went wrong.',
-          variant: 'destructive',
-        });
-      }
-    });
-  }
+  const generateMailLink = () => {
+    const subject = encodeURIComponent(`Contact from ${name || 'your portfolio'}`);
+    const body = encodeURIComponent(message);
+    
+    if (mailOption === 'gmail') {
+      return `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+    }
+    return `mailto:${email}?subject=${subject}&body=${body}`;
+  };
 
   return (
     <Section id="contact" title="Get In Touch">
@@ -57,7 +35,7 @@ export function Contact() {
         <div className="flex flex-col">
           <h3 className="text-2xl font-bold">Contact Me</h3>
           <p className="mt-2 text-muted-foreground">
-            Have a project in mind, a question, or just want to say hi? Feel free to reach out. I'm always open to discussing new opportunities.
+            Have a project in mind, a question, or just want to say hi? Feel free to reach out. I&apos;m always open to discussing new opportunities.
           </p>
           <div className="mt-8 space-y-4">
             <a href={`mailto:${email}`} className="flex items-center gap-4 text-muted-foreground transition-colors hover:text-primary">
@@ -73,57 +51,38 @@ export function Contact() {
           </div>
         </div>
         
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Your Name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="your.email@example.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Message</FormLabel>
-                  <FormControl>
-                    <Textarea placeholder="Your message..." {...field} rows={5} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className="w-full md:w-auto" disabled={isPending}>
-              {isPending ? (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <Send className="mr-2 h-4 w-4" />
-              )}
-              Send Message
-            </Button>
-          </form>
-        </Form>
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <Label htmlFor="name">Name</Label>
+            <Input id="name" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="message">Message</Label>
+            <Textarea id="message" placeholder="Your message..." value={message} onChange={(e) => setMessage(e.target.value)} rows={5} />
+          </div>
+
+          <div className="space-y-2">
+            <Label>Send using</Label>
+            <RadioGroup defaultValue="gmail" onValueChange={setMailOption} className="flex items-center gap-4">
+                <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="gmail" id="r-gmail" />
+                    <Label htmlFor="r-gmail">Gmail</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="legacy" id="r-legacy" />
+                    <Label htmlFor="r-legacy">Legacy (mailto)</Label>
+                </div>
+            </RadioGroup>
+          </div>
+
+          <Button asChild className="w-full md:w-auto">
+            <a href={generateMailLink()} target="_blank" rel="noopener noreferrer">
+              <Send className="mr-2 h-4 w-4" />
+              Open Email Client
+            </a>
+          </Button>
+        </div>
       </div>
     </Section>
   );
