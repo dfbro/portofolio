@@ -4,7 +4,7 @@ This is a comprehensive portfolio template built with modern web technologies, d
 
 This project was bootstrapped in [Firebase Studio](https://firebase.google.com/studio).
 
-![A screenshot of the portfolio homepage, showing the hero section with a profile picture, name, and description.](https://storage.googleapis.com/stabl-media/readmes/portfolio-template-v2.png)
+![A screenshot of the portfolio homepage, showing the hero section with a profile picture, name, and description.](docs/demo.png)
 
 ## Features
 

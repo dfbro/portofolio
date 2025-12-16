@@ -1,20 +1,25 @@
-# **App Name**: Binary Canvas
+# Blueprint — Next.js & ShadCN Portfolio Starter
 
-## Core Features:
+A modern, customizable portfolio template built with **Next.js (App Router)**, **React**, and **TypeScript**. It features a clean, responsive design and a **secure admin panel** that lets you manage portfolio content without editing code. The project was bootstrapped using **Firebase Studio**.
 
-- Personal Introduction: Display a brief, impactful introduction highlighting web development and CTF skills.
-- Project Showcase: Showcase web development projects with descriptions, links, and tech stacks used.
-- CTF Achievements: Display CTF achievements, write-ups, and competition participation details.
-- Skills Overview: Visually represent technical skills in web development and cybersecurity through a dynamic display. An AI tool will decide which information to emphasize, based on user viewing patterns across your website.
-- Contact Information: Provide an easily accessible contact form and links to professional profiles (LinkedIn, GitHub, etc.).
-- Blog/Articles: Share insights on web development techniques, CTF strategies, or cybersecurity trends.
+## Core Features
 
-## Style Guidelines:
+* **Modern tech stack**: Next.js, React, TypeScript
+* **UI & styling**: Tailwind CSS with ShadCN UI components
+* **Admin dashboard**: Password-protected `/admin` panel for managing skills, projects, achievements, and write-ups
+* **Responsive & SEO-friendly**: Mobile-first layout with server-side rendering
+* **Easy configuration**: Personal details and links managed via environment variables
 
-- Primary color: Dark navy blue (#243A73) for professionalism and depth.
-- Background color: Light gray (#E7E9ED) for a clean, modern feel.
-- Accent color: Electric blue (#7DF9FF) for highlights and interactive elements.
-- Body and headline font: 'Inter' sans-serif for a modern, readable experience.
-- Use FontAwesome icons for a consistent and professional look.
-- A single-page layout with clear sections for easy navigation.
-- Subtle, modern animations for transitions and loading states.
+## Setup Overview
+
+1. Clone the repository and install dependencies
+2. Copy `.example.env` to `.env` and configure required variables (admin password, profile info, hostname)
+3. Run the development server with `npm run dev`
+
+## Common Scripts
+
+* `npm run dev` — Start development server
+* `npm run build` — Build for production
+* `npm run start` — Run production build
+* `npm run lint` — Lint codebase
+* `npm run typecheck` — TypeScript type checking

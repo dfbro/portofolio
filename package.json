@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack -p 9002",
+    "clean":"rm -rf .next",
     "build": "NODE_ENV=production next build",
     "start": "bash -c 'set -a && source .env 2>/dev/null || true; next start -p \"${PORT:-3000}\"'",
     "lint": "next lint",
